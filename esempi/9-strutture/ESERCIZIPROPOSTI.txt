@@ -1,0 +1,13 @@
+
+1) Aggiungere al programma persona/persona2/persona3 una funzionalita'
+   che legga la lista iniziale di persone da file, e che poi salvi su
+   file.
+
+2) Realizzare una rubrica telefonica.
+
+3) Realizzare una struttura dati "archivio di studenti" dove gli
+   studenti siano ordinati sia per cognome sia per numero di
+   matricola.
+
+4) Aggiungere agli esempi precedenti e svolti la ricerca con
+   eliminazione di un elemento.

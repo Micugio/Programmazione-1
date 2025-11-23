@@ -1,0 +1,1 @@
+Scrivere un programma che prenda in input un Testo. e generi lo stesso Testo dove ogni separatore sia convertito in un unico blank . ciao 

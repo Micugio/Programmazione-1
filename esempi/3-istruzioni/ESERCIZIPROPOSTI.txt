@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ESERCIZI PROPOSTI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1) Scrivere un programma che risolva un'equazione di 2 grado nei reali
+
+     ax^2 + b*x + c = 0
+
+     se b^2 - 4ac >= 0
+     x1 = (-b + sqrt(b^2 - 4ac)) / 2a
+     x2 = (-b - sqrt(b^2 - 4ac)) / 2a
+
+     se b^2 - 4ac < 0 non definita
+
+2) Scrivere un programma che risolva un'equazione di 2 grado, dando
+   anche le soluzioni complesse
+
+     ax^2 + b*x + c = 0
+
+     se b^2 - 4ac >= 0
+     x1 = (-b + sqrt(b^2 - 4ac)) / 2a
+     x2 = (-b - sqrt(b^2 - 4ac)) / 2a
+
+     se b^2 - 4ac < 0
+
+     x1 = -b/2a "+"  sqrt(-(b^2 - 4ac))) / 2a "i"
+     x2 = -b/2a "-"  sqrt(-(b^2 - 4ac))) / 2a "i"
+
+     e.g.   3.0 + 4.0i e 3.0 - 4.0i
+
+3) Scrivere un programma che chieda un carattere che identifica una
+   lingua (es: 'i'= italiano, 'e'=inglese, ecc.) e scriva "buon
+   giorno" nella lingua prescelta. Usare l'istruzione switch.
+
+4) Scrivere un programma che "indovini" un numero tra 0 e 7 facendo
+   una serie di domande che richiedano risposta del tipo "s/n" all'utente.

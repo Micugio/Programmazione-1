@@ -1,0 +1,117 @@
+# Programmazione 1
+
+## Compilatore
+g++ <nomefile.cc> -> compila file (comando da eseguire all'interno della cartella del file).
+./a.out -> esegue l'ultimo file compilato.
+ls -> mostra percorsi all'intermo del percorso in cui sono.
+cd <nomepercorso> -> apre il percorso scritto.
+cd /mnt/c/esempiP1 -> va alla cartella esempi Programmazione 1 su Windows 11.
+
+## Git
+git clone <link> -> clona repository sulla macchina locale.
+git add . -> aggiunge tutte le modifiche effettuate nel repository alle modifiche che verrano salvate.
+git commit -m "<messaggio>" -> salva tutte le modifiche sul repository locale.
+git push -> invia le modifiche del repository locale online.
+git pull -> copia le modifica, del repository da github a locale.
+
+## SEQUENZE DI ESCAPE COMUNI:
+Escape    Character represented
+  \b        Backspace (cancella un carattere a sinistra)
+  \n        Newline (va a capo)
+  \t		Tab
+  \\		Backslash (\)
+  \'		Apostrofo
+  \"		Virgolette
+
+## Valori Buleani
+NOT (!) = valore opposto di quel valore (si usa una una sola variabile)
+AND (&&) = stesso valore restituisce quel valore 
+OR (||) = true se un valore è true
+XOR = true se sono valori diversi (true o false)
+  valore booleano:    true = 1     false = 0
+  valore booleano: true=1 false=0
+
+## Maiuscole e minuscole
+(a sempre minore b, A sempre minore a)
+Assumo che il valore delle Maiuscole precede le minuscole
+E carattere in input è una lettera
+Maiuscole = minore di 91
+minuscole = maggiore di 91
+Assumo che il valore delle minuscole precede le Maiuscole
+
+## Variabili
+Se inizializzo variabile senza assegnarli valore fuori main è una variabile globale con valore = 0.
+Se inizializzo variabile dentro main senza assegnarli valore non so quale valore assume.
+QUINDI assegna sempre valore a variabile inizializzata.
+
+## Espressione condizionale ( condizione ? valore_se_vero : valore_se_falso )
+ESEMPIO SEMPLICE ( i==5 ? n=1  : n=0 ):
+if (i==5) {
+  n=1;
+} else {
+  n=0;
+}
+ESEMPIO COMPLESSO ( found ? location-1 : -1 ):
+if (found) {
+  return location - 1; // Restituisce questo se 'found' è vero
+} else {
+  return -1;           // Restituisce questo se 'found' è falso
+}
+
+## Ordine operatori (dal più alto al più basso)
+Operatori unari e di precedenza più alta: ::, (), ++ (prefisso), sizeof, * (indiretto), & (indirizzo), ~, !.
+Moltiplicativi: * (moltiplicazione), / (divisione), % (modulo).
+Additivi: + (addizione), - (sottrazione).
+Shifts bit a bit: <<, >>.
+Relazionali: <, <=, >, >=.
+Di uguaglianza: ==, !=.
+AND bit a bit: &.
+OR bit a bit: ^.
+OR esclusivo bit a bit: |.
+AND logico: &&.
+OR logico: ||.
+Espressione condizionale: ?:.
+Assegnazione: =, +=, -=, *= ecc.
+
+## Funzioni o Procedure (NOTA: procedura = funzione void)
+1) funzione int = FUNZIONE
+2) funzione void = PROCEDURA
+
+## Quando usare Riferimento o Puntatore
+|   Caso                                      | Usa riferimento | Usa puntatore |
+| ------------------------------------------- | --------------- | ------------- |
+| Modificare una variabile passata a funzione |   ✔️            |   ✔️         |
+| Evitare valori nulli                        |   ✔️            |   ❌         |
+| Devi poter cambiare ciò a cui “punta”       |   ❌            |   ✔️         |
+| Allocazione dinamica                        |   ❌            |   ✔️         |
+| Strutture dati dinamiche (liste, alberi)    |   ❌            |   ✔️         |
+## Puntatori (*pd)
+1) INZIALIZZAZIONE: int *pd = &x (NOTA: Sempre inizializzare puntatore e dirgli a cosa puntare).
+2) Nuova variabile (con suo spazio in memoria). 
+3) Punta all'indirizzo di un'altra variabile assumendo come valore il suo indirizzo, però se uso *pd ottengo anche valore a cui punta.
+4) L'indirizzo a cui punta il puntatore può essere cambiato
+5) ESEMPIO: *pd = 5 (cambia il valode di pd con 5).
+## Altre tipologie di puntatori
+1) Puntatori a void
+2) Puntatori a costante
+3) Costanti puntatori
+4) Costanti puntatore a costante
+5) Puntatori a puntatori
+## Riferimenti a
+1) INZIALIZZAZIONE: int &y = x
+2) Alias (sinonimo) di una variabile, NON è una copia di quella variabile.
+3) Non ha uno spazio in memoria dedicato.
+4) Dopo esser stato inizializzato e legato PER SEMPRE a quella variabile, non si può "sciogliere" il legame o cambiare variabile.
+## Significato operatori "&" e "*"
+&x -> ottengo indirizzo di x (variabile)
+*pd -> ottengo valore numerico di pd (puntatore) -> INFATTI: Se scrivessi SOLO pd -> otterei indirizzo di pd (puntatore).
+
+## Funzioni o Procedure (NOTA: procedura = funzione void)
+1) funzione int = FUNZIONE
+2) funzione void = PROCEDURA
+
+## Array
+Array e funzioni = gli array vengono passati per riferimento alla funzione (cioè sono dei puntatori), allora è meglio mettere davanta "const" a "int myArray [dim]" (dim è un numero costante); int funzione (const int myArray [dim]);
+Come abilitare protezione per non uscire fuori dall'indice array?
+    Da scrivere nel compilatore:   g++ -fstack-protector-strong nomeEsercizio.cc
+Nota: verificare se è già attivo uscendo apposta fuori dall'indice dell'array (se esce mi da errore "stack smashing detected")
