@@ -1,11 +1,29 @@
 #include <iostream>
 using namespace std;
+ 
+int main () {
 
-int main() {
-    int x = 22;
-    int &ptr = x;
+  int x = 5;
 
-    cout << ptr << endl;
-    
-    return 0;
+  cout << x << endl;
+  cout << &x << endl;
+
+  cout << endl;
+
+  int *p = &x;
+
+  cout << "p = " << p << endl;
+  cout << "*p = " << *p << endl;
+  cout << "&p = " << &p << endl;
+
+  cout << endl;
+
+  int *q = p;
+
+  cout << "q = " << q << endl;
+  cout << "*q = " << *q << endl;
+  cout << "&q = " << &q << endl;
+
+  
+  return 0;
 }

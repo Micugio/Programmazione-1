@@ -10,21 +10,18 @@ using namespace std;
 const int DIM1 = 3;
 const int DIM2 = 5;
 
-void read(int a[][DIM2]);
-
 void print(const int a[][DIM2]);
 
-int main()
-{
+int main() {
   int a[][DIM2] = {{1, 2, 3, 4, 5},
                    {6, 7, 8, 9, 10},
                    {11, 12, 13, 14, 15}};
   print(a);
+
   return 0;
 }
 
-void print(const int a[][DIM2])
-{
+void print(const int a[][DIM2]) {
   for (int i = 0; i < DIM1; i++) {
     for (int j = 0; j < DIM2; j++)
       cout << " " << setw(4)  << a[i][j];

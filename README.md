@@ -77,6 +77,12 @@ Assegnazione: =, +=, -=, *= ecc.
 1) funzione int = FUNZIONE
 2) funzione void = PROCEDURA
 
+## TUTTI I CASI DI UTILIZZO PUNTATORI
+| Cosa voglio fare                   |        Sintassi       | Perché                                            |
+| ---------------------------------- | --------------------- | ------------------------------------------------- |
+| Puntare a una variabile normale    |        *p = &x        | x non è un indirizzo                              |
+| Puntare a un puntatore             |        *p = &p        | serve l’indirizzo del puntatore                   |
+| Copiare un indirizzo già esistente |  (*p = &x) -> *q = p  | p (essendo un puntatore) contiene già l’indirizzo |
 ## Quando usare Riferimento o Puntatore
 |   Caso                                      | Usa riferimento | Usa puntatore |
 | ------------------------------------------- | --------------- | ------------- |
@@ -85,10 +91,10 @@ Assegnazione: =, +=, -=, *= ecc.
 | Devi poter cambiare ciò a cui “punta”       |   ❌            |   ✔️         |
 | Allocazione dinamica                        |   ❌            |   ✔️         |
 | Strutture dati dinamiche (liste, alberi)    |   ❌            |   ✔️         |
-## Puntatori (*pd)
+## Puntatori (*pd) RICORDA: puntatore ha come valore l'indirizzo della variabile a cui punta
 1) INZIALIZZAZIONE: int *pd = &x (NOTA: Sempre inizializzare puntatore e dirgli a cosa puntare).
 2) Nuova variabile (con suo spazio in memoria). 
-3) Punta all'indirizzo di un'altra variabile assumendo come valore il suo indirizzo, però se uso *pd ottengo anche valore a cui punta.
+3) IMPORTANTE: puntatore punta all'indirizzo di un'altra variabile assumendo come valore il suo indirizzo, però se uso *pd ottengo anche valore a cui punta.
 4) L'indirizzo a cui punta il puntatore può essere cambiato
 5) ESEMPIO: *pd = 5 (cambia il valode di pd con 5).
 ## Altre tipologie di puntatori
