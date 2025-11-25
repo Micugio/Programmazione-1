@@ -1,28 +1,26 @@
 using namespace std;
 #include <iostream>
 
-const int size = 100;
-
 void leggiArray(double [], int&);
 void stampaArray(const double [], int);
 void mergeArray(const double [],int,const double [],int ,double []);
 
-int main()
-{
+int main() {
+  const int size = 100;
   int n1,n2;
-   double a[size];
-   double b[size];
-   double c[2*size];
+  double a[size];
+  double b[size];
+  double c[2*size];
    
-   leggiArray(a,n1);
-   stampaArray(a,n1);
-   leggiArray(b,n2);
-   stampaArray(b,n2);
-   mergeArray(a,n1,b,n2,c);
-   cout << "L'array risultante e': \n ";
-   stampaArray(c,n1+n2);
+  leggiArray(a,n1);
+  stampaArray(a,n1);
+  leggiArray(b,n2);
+  stampaArray(b,n2);
+  mergeArray(a,n1,b,n2,c);
+  cout << "L'array risultante e': \n ";
+  stampaArray(c,n1+n2);
 
-   return 0;
+  return 0;
 }
 
 void leggiArray(double a[], int& n)

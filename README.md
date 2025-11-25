@@ -73,10 +73,6 @@ OR logico: ||.
 Espressione condizionale: ?:.
 Assegnazione: =, +=, -=, *= ecc.
 
-## Funzioni o Procedure (NOTA: procedura = funzione void)
-1) funzione int = FUNZIONE
-2) funzione void = PROCEDURA
-
 ## TUTTI I CASI DI UTILIZZO PUNTATORI
 | Cosa voglio fare                   |        Sintassi       | Perché                                            |
 | ---------------------------------- | --------------------- | ------------------------------------------------- |
@@ -116,8 +112,11 @@ Assegnazione: =, +=, -=, *= ecc.
 1) funzione int = FUNZIONE
 2) funzione void = PROCEDURA
 
-## Array
-Array e funzioni = gli array vengono passati per riferimento alla funzione (cioè sono dei puntatori), allora è meglio mettere davanta "const" a "int myArray [dim]" (dim è un numero costante); int funzione (const int myArray [dim]);
+## Array e Funzioni
+Gli array vengono passati per riferimento alla funzione (cioè sono dei puntatori), allora è meglio mettere davanti "const" a "int myArray [dim]" (dim è un numero costante); int funzione (const int myArray [dim]);
+Quando passi un array a una funzione, diventa un puntatore, la dimensione si perde.
+Negli array 1D il compilatore non ha bisogno della dimensione, semplicemente gli scorre tutti un numero stabilito di volte (dim).
+Negli array 2D invece DEVE sapere la dimensione della riga, serve la seconda dimensione (DIM2) che indica il numero di colonne (cioè gli elementi di ogni riga prima di dover passare alla riga successiva).
 Come abilitare protezione per non uscire fuori dall'indice array?
     Da scrivere nel compilatore:   g++ -fstack-protector-strong nomeEsercizio.cc
-Nota: verificare se è già attivo uscendo apposta fuori dall'indice dell'array (se esce mi da errore "stack smashing detected")
+  Nota: verificare se è già attivo uscendo apposta fuori dall'indice dell'array (se esce mi da errore "stack smashing detected")
