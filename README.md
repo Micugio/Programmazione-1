@@ -43,6 +43,7 @@ Assumo che il valore delle minuscole precede le Maiuscole
 Se inizializzo variabile senza assegnarli valore fuori main è una variabile globale con valore = 0.
 Se inizializzo variabile dentro main senza assegnarli valore non so quale valore assume.
 QUINDI assegna sempre valore a variabile inizializzata.
+IN GENERALE: cercare di NON usare variabili globali, in caso devono essere costanti e con nomi maiuscoli (es: const int Y;).
 
 ## Espressione condizionale ( condizione ? valore_se_vero : valore_se_falso )
 ESEMPIO SEMPLICE ( i==5 ? n=1  : n=0 ):
