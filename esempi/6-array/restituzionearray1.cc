@@ -2,6 +2,8 @@ using namespace std;
 #include <iostream>
 #include <iomanip>
 
+// Variate di restituzionearray.cc, semplicemente l'array è definito globalmente.
+
 const int dim=10;
 
 int a[dim] = {1,2,3,4,5,6,7,8,9,dim};
@@ -12,8 +14,7 @@ void printarray (int v[], int dim) {
   cout << endl;
 }
 
-//NB: "a" allocato staticamente 
-//all'esterno della funzione!
+//NB: "a" allocato staticamente all'esterno della funzione!
 int *times(int k) {
   for (int i=0; i<dim; i++)
     a[i]=a[i]*k;
@@ -21,8 +22,7 @@ int *times(int k) {
 }
 
 
-int main () 
-{
+int main () {
   int * w;
   printarray(a,dim);
   w = times(4);

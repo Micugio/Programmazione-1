@@ -2,13 +2,13 @@ using namespace std;
 #include <iostream>
 
 
-const int size = 100;
+const int csize = 100;
 
 void leggiArray(double [], int&);
 void stampaArray(const double [], int);
 void concatenaArray(const double a[], const double b[], double c[], int n1, int n2);
 
-double a[size],b[size],c[2*size];
+double a[csize],b[csize],c[2*csize];
 
 int main()
 {

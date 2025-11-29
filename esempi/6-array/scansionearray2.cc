@@ -1,4 +1,4 @@
-b//  Example 6.10, page 164
+//  Example 6.10, page 164
 //  Schaum's Outline of Programming with C++ by John R. Hubbard
 //  Copyright McGraw-Hill, 1996
 

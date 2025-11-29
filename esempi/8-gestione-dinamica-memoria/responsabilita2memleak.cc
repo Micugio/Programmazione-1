@@ -24,7 +24,7 @@ int main()
   cin >> n;
   a = new double[n];
   get(a, n);
-  print(a, n);   
+  print(a, n);
   delete [] a;   
 
   return 0;

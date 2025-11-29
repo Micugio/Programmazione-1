@@ -18,10 +18,10 @@ git pull -> copia le modifica, del repository da github a locale.
 Escape    Character represented
   \b        Backspace (cancella un carattere a sinistra)
   \n        Newline (va a capo)
-  \t		Tab
-  \\		Backslash (\)
-  \'		Apostrofo
-  \"		Virgolette
+  \t		    Tab
+  \\		    Backslash (\)
+  \'		    Apostrofo
+  \"		    Virgolette
 
 ## Valori Buleani
 NOT (!) = valore opposto di quel valore (si usa una una sola variabile)

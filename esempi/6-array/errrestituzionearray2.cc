@@ -18,8 +18,7 @@ int *times(int a[dim], int k) {
 }
 
 
-int main () 
-{
+int main () {
   int v[dim] = {1,2,3,4,5,6,7,8,9,10};
   int * v1, *v2, *v3;
 

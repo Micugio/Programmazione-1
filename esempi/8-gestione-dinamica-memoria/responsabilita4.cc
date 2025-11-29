@@ -47,6 +47,6 @@ void print(double* a, int n)
 
 void dealloc(double* &a)
 {
-  delete [] a;   //
-  // a = nullptr;
+  delete [] a;
+  // a = nullptr; // Se provo di nuovo ad accedere ad "a" mi da ERRORE IMMEDIATO e visibile (Segmentation Fault)
 }
