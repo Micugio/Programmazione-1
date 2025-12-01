@@ -9,6 +9,7 @@ using namespace std;
 // NOTA: Dopo aver compilato file usare:  ./a.out < testo1.txt
 
 const int DIM = 80; // Numero limite di caratteri contenuti nella singola parola, siccome cin legge una parola per volta perchè ci sono in mezzo gli spazi
+
 int main()
 {
   char word[DIM];

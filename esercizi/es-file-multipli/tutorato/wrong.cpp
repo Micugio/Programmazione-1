@@ -22,18 +22,14 @@ struct Zaino {
     int *oggetti;
 };
 
-// inizializza uno zaino,
+// inizializza uno zaino passato come parametro,
 // l'oggetto 'vuoto' ha valore 0
-Zaino init(int capacita) {
-    Zaino z;
-
+void init(Zaino &z, int capacita) {
     z.capacita = capacita;
     z.oggetti = new int[64];
     for (int i = 0; i < 64; i++) {
         z.oggetti[i] = 0;
     }
-
-    return z;
 }
 
 // ritorna massa totale degli oggetti nello zaino
@@ -82,7 +78,8 @@ void stampaZaino(Zaino &z) {
 }
 
 int main() {
-    Zaino z = init(100);
+    Zaino z;
+    init(z, 100);
 
     int objs[10] = {10, 10, 34, 1, 14, 13, 4, 0, 2, 3};
 
