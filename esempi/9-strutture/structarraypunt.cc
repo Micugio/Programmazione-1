@@ -10,7 +10,7 @@ int main ()
 
   int_array sa, sb;
   sa.ia = new int[3];
-  // sb.ia = new int[3];
+  // sb.ia = new int[3]; // ERRORE di Memory Leak: se lo aggiungo e non faccio "delete [] sb.ia"
 
   sa.ia[0]=1;
   sa.ia[1]=2;

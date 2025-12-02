@@ -12,16 +12,16 @@ int main (int argc, char * argv[])
   float aliquota = 22;
   float val;
 
-  if (argc==1){           // nessun argomento
+  if (argc==1){   //(input nessun argomento)
     cout << "Valore? ";
     cin >> val;
   }
-  else if (argc == 2) {   // un argomento: il valore
-    val = atof(argv[1]);
+  else if (argc == 2) {  //(input un argomento: il valore)
+    val = atof(argv[1]); // NB: Converte una stringa in double.
   }
-  else if (argc == 3) {   // due argomento: il valore e l'aliquota
-    val = atof(argv[1]);
-    aliquota = atof(argv[2]);
+  else if (argc == 3) {   //(input due argomenti: il valore e l'aliquota)
+    val = atof(argv[1]); // NB: Converte una stringa in double.
+    aliquota = atof(argv[2]); // NB: Converte una stringa in double.
   }
   else {
     cout << "Troppi argomenti!!!\n";

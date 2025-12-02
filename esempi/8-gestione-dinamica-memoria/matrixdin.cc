@@ -45,8 +45,7 @@ void print_matrix (int ** a,int d1,int d3)
 
 int main () 
 {
-  int d1=2;
-  int d2=3;
+  int d1,d2;
   
   int i,j;
   

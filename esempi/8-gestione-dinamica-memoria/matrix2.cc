@@ -3,6 +3,7 @@ using namespace std;
 #include <cstdlib>
 #include <new>
 
+// ERRORE: No deallocazione matrice.
 
 void nomemory()
 {
@@ -10,7 +11,6 @@ void nomemory()
        << "impossibile allocare " << endl;
   exit(0);
 }
-
 
 float ** alloc_matrix (int  d1,int  d2)
 {

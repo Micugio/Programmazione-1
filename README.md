@@ -14,6 +14,16 @@ git commit -m "<messaggio>" -> salva tutte le modifiche sul repository locale.
 git push -> invia le modifiche del repository locale online.
 git pull -> copia le modifica, del repository da github a locale.
 
+## Valgrid
+INSTALLARE:
+  sudo apt update
+  sudo apt upgrade
+  sudo apt install valgrind
+  valgrind --version   //Verifica installazione
+COMPILAZIONE ed ESECUZIONE:
+  g++ -g nomefile.cc
+  valgrind ./a.out
+
 ## SEQUENZE DI ESCAPE COMUNI:
 Escape    Character represented
   \b        Backspace (cancella un carattere a sinistra)
@@ -74,6 +84,23 @@ OR logico: ||.
 Espressione condizionale: ?:.
 Assegnazione: =, +=, -=, *= ecc.
 
+## LIBRERIE UTILI
+#include <iomanip>
+  setw(n) //Stampa n spazi.
+  numero << setprecision(n) //Stampa n cifre del "numero" (senza approssimazione).
+  numuro << fixed << setprecision(n) //Stampa n cifre di "numero" (con approssimazione).
+#include <cctype>
+  isalnum(c) //Carattere "c" è alfanumerico? True=1 False=0.
+  toupper(c) //Converte "c" da minuscola a Maiuscola (NB: SOLO SE "c" è minuscolo NON il contrario o altri casi).
+#include <cstdlib>
+  srand(time(NULL)) //(quando inizializzo)  ->  rand() //(quando la uso).
+  atoi(argv[1]) //Converte una stringa in int.
+  atof(argv[2]) //Converte una stringa in double.
+#include <cstring>
+  strlen(s) //Lunghezza stringa "s" senza terminatore.
+  strcpy(s,t) //Copia (sovrascrivendo) stringa "t" in stringa "s" e restituisce "s".
+  strcat(s,t) //Copia in coda stringa "t" in stringa "s" e restituisce "s".
+
 ## TUTTI I CASI DI UTILIZZO PUNTATORI
 | Cosa voglio fare                   |        Sintassi       | Perché                                            |
 | ---------------------------------- | --------------------- | ------------------------------------------------- |
@@ -118,6 +145,3 @@ Gli array vengono passati per riferimento alla funzione (cioè sono dei puntator
 Quando passi un array a una funzione, diventa un puntatore, la dimensione si perde.
 Negli array 1D il compilatore non ha bisogno della dimensione, semplicemente gli scorre tutti un numero stabilito di volte (dim).
 Negli array 2D invece DEVE sapere la dimensione della riga, serve la seconda dimensione (DIM2) che indica il numero di colonne (cioè gli elementi di ogni riga prima di dover passare alla riga successiva).
-Come abilitare protezione per non uscire fuori dall'indice array?
-    Da scrivere nel compilatore:   g++ -fstack-protector-strong nomeEsercizio.cc
-  Nota: verificare se è già attivo uscendo apposta fuori dall'indice dell'array (se esce mi da errore "stack smashing detected")
