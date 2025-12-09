@@ -6,7 +6,7 @@ struct S1;
 
 struct S1 {
   int value;
-  S2 *next;
+  S2 *next; // GIUSTO, S2 non è ancora definita ma è stata DICHIARATA sopra.
 }; // Ok!
 
 struct S2  { // definizione di S2

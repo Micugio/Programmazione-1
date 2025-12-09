@@ -3,7 +3,7 @@ using namespace std;
 
 struct S {
   int value;
-  S *next;
+  S *next; // GIUSTO, uso un puntatore che occupa sempre lo stesso spazio di memoria.
 };
 
 int main ()
