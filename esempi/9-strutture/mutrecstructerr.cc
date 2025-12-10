@@ -3,7 +3,7 @@ using namespace std;
 
 struct S1 {
   int value;
-  S2 *next;
+  S2 *next; // SBAGLIATO, S2 non è ancora definita.
 }; // Ok!
 
 struct S2  { // definizione di S2

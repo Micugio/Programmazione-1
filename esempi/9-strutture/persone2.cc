@@ -166,7 +166,7 @@ bool inserisci_persona(const persona & p, gruppo & g)
   if (g.npers==NmaxPers)
     res = false;
   else {
-    g.persone[g.npers]= new persona;
+    g.persone[g.npers]= new persona; // Allocazione DINAMICA, però MANCA deallocazione.
     *(g.persone[g.npers])=p;
     //  g.persone[g.npers]= &p; // !!!! NO!
     g.npers++;
