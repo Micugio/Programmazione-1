@@ -18,9 +18,9 @@ int length(nodo * s) {
   return result;
 }
 
-// Dealloca la memoria della lista
-void delete_list(nodo * & s) {
-  // Alla fine la lista e' vuota. Passaggio per riferimento.
+// Dealloca la memoria della lista (funzione iterativa, passaggio per riferimento)
+void delete_list(nodo * & s) {   // Passaggio per riferimento
+  // Alla fine la lista e' vuota.
   while(s != NULL) {
     // Salvo il valore del nodo corrente
     nodo * t = s;
@@ -30,6 +30,46 @@ void delete_list(nodo * & s) {
     delete t;
   }
 }
+
+/*
+// Dealloca la memoria della lista (funzione iterativa, passaggio per valore)
+void delete_list(nodo * s) {    //(passaggio per valore)
+  // Alla fine la lista e' vuota.
+  while(s != NULL) {
+    // Salvo il valore del nodo corrente
+    nodo * t = s;
+    // Avanzo al nodo sucessivo
+    s = s->next;
+    // Dealloco il nodo salvato
+    delete t;
+  }
+}
+DOPO funzione DEVO AGGIUNGERE nel main:
+s = nullptr;   // Puntatore head diventa nullptr
+*/
+
+
+// Dealloca la memoria della lista (funzione ricorsiva, passaggio per riferimento)
+void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
+    delete_list_ric(s->next);
+    delete s;
+    s = nullptr;  // Puntatore head diventa nullptr
+  }
+}
+
+/*
+// Dealloca la memoria della lista (funzione ricorsiva, passaggio per valore)
+void delete_list_ric(nodo * s) {
+  if (s != nullptr) {
+    delete_list_ric(s->next);
+    delete s;
+  }
+}
+DOPO funzione DEVO AGGIUNGERE nel main:
+s = nullptr;  // Puntatore head diventa nullptr
+*/
+
 
 // Stampa contenuto della lista
 void stampa(nodo * s) {
@@ -53,7 +93,8 @@ void insert_first(nodo * &s, int d) {
 
 void insert_last(nodo * & s, int d) {
   nodo * n = new nodo;
-  n->dato = d; n->next = NULL;
+  n->dato = d; 
+  n->next = NULL;
 
   // Se la lista e' vuota, allora s dovra' puntare al nuovo nodo
   if (s == NULL) {
@@ -254,7 +295,8 @@ int main() {
 
     cout << "Inserting number " << d << endl;
     nodo * t = new nodo;
-    t->dato = d; t->next = L1;
+    t->dato = d; 
+    t->next = L1;
     L1 = t;
   }
   cout << "La lista L1 creata e':" << endl;
@@ -268,7 +310,8 @@ int main() {
 
     cout << "Inserting number " << d << endl;
     nodo * t = new nodo;
-    t->dato = d; t->next = L2;
+    t->dato = d; 
+    t->next = L2;
     L2 = t;
   }
   cout << "La lista L2 creata e':" << endl;

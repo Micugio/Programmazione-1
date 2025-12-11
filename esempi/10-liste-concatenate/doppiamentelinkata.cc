@@ -1,5 +1,4 @@
 
-
 void insert_node(node * x, node * t) {
   t->next = x->next;
   t->next->prev = t;
