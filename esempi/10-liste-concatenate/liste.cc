@@ -9,14 +9,23 @@ struct nodo {
 };
 
 
-// Calcolo della lunghezza di una lista
-int length(nodo * s) {
+// Calcolo della lunghezza di una lista (funzione iterativa)
+int length(nodo * s) {  // NOTA: SEMPRE passaggio per valore, per riferimento perdo accesso a lista (perchè nodo iniziale s (head) alla fine della funzione punterà a null, cioè avrò una lista vuota senza nodi)
   int result = 0;
 
   for( ; s != NULL; s = s->next)
     result++;
   return result;
 }
+
+// Calcolo della lunghezza di una lista (funzione ricorsiva)
+int length_ric(nodo * s) { // NOTA: passaggio per valore perchè voglio solo contare elementi e non modificare nodo iniziale s (head)
+  if (nullptr == s) {
+    return 0;
+  }
+  return 1 + length_ric(s->next);
+}
+
 
 // Dealloca la memoria della lista (funzione iterativa, passaggio per riferimento)
 void delete_list(nodo * & s) {   // Passaggio per riferimento
@@ -30,7 +39,6 @@ void delete_list(nodo * & s) {   // Passaggio per riferimento
     delete t;
   }
 }
-
 /*
 // Dealloca la memoria della lista (funzione iterativa, passaggio per valore)
 void delete_list(nodo * s) {    //(passaggio per valore)
@@ -48,7 +56,6 @@ DOPO funzione DEVO AGGIUNGERE nel main:
 s = nullptr;   // Puntatore head diventa nullptr
 */
 
-
 // Dealloca la memoria della lista (funzione ricorsiva, passaggio per riferimento)
 void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
   if (s != nullptr) {  // Tutti i casi tranne quando è caso base
@@ -57,7 +64,6 @@ void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
     s = nullptr;  // Puntatore head diventa nullptr
   }
 }
-
 /*
 // Dealloca la memoria della lista (funzione ricorsiva, passaggio per valore)
 void delete_list_ric(nodo * s) {
@@ -80,6 +86,7 @@ void stampa(nodo * s) {
   }
 }
 
+
 void insert_first(nodo * &s, int d) {
   // Creo il nuovo nodo e memorizzo il valore utilizzando costruttore
   // ad un solo argomento
@@ -90,6 +97,7 @@ void insert_first(nodo * &s, int d) {
   // s punt a nuovo nodo n
   s = n;
 }
+
 
 void insert_last(nodo * & s, int d) {
   nodo * n = new nodo;
@@ -143,6 +151,7 @@ void remove_first(nodo * & s) {
   }
 }
 
+
 void remove_element(nodo * & p, int d) {
  if (p != NULL) {
    nodo* q = p;
@@ -166,6 +175,7 @@ void remove_element(nodo * & p, int d) {
  }
 }
 
+
 // Reverse con side effect sulla lista originaria
 nodo * reverse(nodo * x) {
    nodo * t;
@@ -181,6 +191,7 @@ nodo * reverse(nodo * x) {
    return r;
 }
 
+
 // Costruzione della lista rovesciata costruendo una lista nuova
 nodo * reverse_copia(nodo * x) {
   nodo * r = NULL;
@@ -193,6 +204,7 @@ nodo * reverse_copia(nodo * x) {
   }
   return r;
 }
+
 
 // Ricerca a e ritorna l'elemento n-esimo se esite
 nodo * get_n(nodo * s, int n) {
@@ -208,6 +220,7 @@ nodo * get_n(nodo * s, int n) {
   // giusto. Altrimenti s punta a NULL e lo possiamo ritornare.
   return s;
 }
+
 
 // Ritornare il nodo che precede un nodo x
 nodo * prec(nodo * s, nodo * x) {
@@ -233,11 +246,13 @@ nodo * prec(nodo * s, nodo * x) {
   return t;
 }
 
+
 nodo  * concat_se_ricorsiva(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
   s1->next = concat_se_ricorsiva(s1->next, s2);
   return s1;
 }
+
 
 nodo  * concat_se_iterativa(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
@@ -253,6 +268,7 @@ nodo  * concat_se_iterativa(nodo  * s1, nodo  * s2) {
   return s1;
 }
 
+
 nodo  * copy_seq(nodo  * s) {
   if (s == NULL) return NULL;
   nodo * t = new nodo;
@@ -260,6 +276,7 @@ nodo  * copy_seq(nodo  * s) {
   t->next = copy_seq(s->next);
   return t;
 }
+
 
 nodo  * concat_nose(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return copy_seq(s2);
@@ -277,6 +294,7 @@ nodo  * concat_nose(nodo  * s1, nodo  * s2) {
   return cs1;
 }
 
+
 nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
   if (s1 == NULL) return copy_seq(s2);
 
@@ -285,6 +303,8 @@ nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
   t->next = concat_nose_recur(s1->next, s2);
   return t;
 }
+
+
 
 
 int main() {
@@ -299,9 +319,11 @@ int main() {
     t->next = L1;
     L1 = t;
   }
+  cout << endl;
   cout << "La lista L1 creata e':" << endl;
   stampa(L1);
 
+  cout << endl;
 
   nodo * L2 = NULL;
 
@@ -314,12 +336,18 @@ int main() {
     t->next = L2;
     L2 = t;
   }
+  cout << endl;
   cout << "La lista L2 creata e':" << endl;
   stampa(L2);
 
+  cout << endl;
+
   // Provare ad inserire qui le funzioni definite prima
+  cout << "La lista L1 ha lunghezza: " << length(L1) << endl;
+  cout << "La lista L2 ha lunghezza: " << length(L2) << endl;
 
 
+  // Per eliminare memoria dinamica ed evitare memory leak:
   delete_list(L2);
   delete_list(L1);
 }
