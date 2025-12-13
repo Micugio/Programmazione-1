@@ -2,6 +2,7 @@
 
 ## Compilatore
 g++ <nomefile.cc> -> compila file (comando da eseguire all'interno della cartella del file).
+COMPILAZIONE file MULTIPLI (al file principale do il nome main): g++ <main.cc>
 ./a.out -> esegue l'ultimo file compilato.
 ls -> mostra percorsi all'intermo del percorso in cui sono.
 cd <nomepercorso> -> apre il percorso scritto.
