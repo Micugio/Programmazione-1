@@ -94,7 +94,7 @@ Assegnazione: =, +=, -=, *= ecc.
   isalnum(c) //Carattere "c" è alfanumerico? True=1 False=0.
   toupper(c) //Converte "c" da minuscola a Maiuscola (NB: SOLO SE "c" è minuscolo NON il contrario o altri casi).
 #include <cstdlib>
-  srand(time(NULL)) //(quando inizializzo)  ->  rand() //(quando la uso).
+  srand(time(NULL)); //(quando inizializzo)  ->  rand() //(quando la uso).
   atoi(argv[1]) //Converte una stringa in int.
   atof(argv[2]) //Converte una stringa in double.
 #include <cstring>
@@ -138,8 +138,10 @@ Assegnazione: =, +=, -=, *= ecc.
 *pd -> ottengo valore numerico di pd (puntatore) -> INFATTI: Se scrivessi SOLO pd -> otterei indirizzo di pd (puntatore).
 
 ## Funzioni o Procedure (NOTA: procedura = funzione void)
-1) funzione int = FUNZIONE
+1) funzione int, double, ... = FUNZIONE
 2) funzione void = PROCEDURA
+1. parametri formali = parametri della definizione
+2. parametri attuali = parametri della chiamata
 
 ## Array e Funzioni
 Gli array vengono passati per riferimento alla funzione (cioè sono dei puntatori), allora è meglio mettere davanti "const" a "int myArray [dim]" (dim è un numero costante); int funzione (const int myArray [dim]);
