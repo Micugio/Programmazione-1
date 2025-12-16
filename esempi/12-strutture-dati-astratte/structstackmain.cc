@@ -1,6 +1,8 @@
 using namespace std;
 #include <iostream>
-#include "struct_stack.h"
+#include "structstack.h"
+
+// COMPILARE CON: g++ structstack.cc structstackmain.cc
 
 int main ()
 {
@@ -41,6 +43,6 @@ int main ()
     default:
       cout << "Opzione errata\n";
     }
-  } while (res != 'f');
-  deinit(s);
+  } while (res != 'f');  // Dopo aver eseguito ogni operazione, ripete il ciclo in loop fino a quando non do come input 'f'.
+  deinit(s);  // (vedi riga 33 file structstack.cc)
 }

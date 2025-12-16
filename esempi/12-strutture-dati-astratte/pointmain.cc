@@ -2,6 +2,16 @@
 using namespace std;
 #include "point.h"
 
+
+// COMPILARE CON: g++ point.cc pointmain.cc
+
+
+// OPPURE CON: g++ -c pointmain.cc  (NOTA: crea file oggetto, in queso modo non usa linker del compilatore)
+
+// Se voglio NON USARE (g++ -c pointmain.cc):
+// #include "point.cc"
+// Al posto di (#include "point.h"), POI compilo con (g++ pointmain.cc)
+
 int main() {
   double t;
   Point P2, P1, P3;
