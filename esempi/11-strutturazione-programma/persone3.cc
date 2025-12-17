@@ -3,11 +3,7 @@ using namespace std;
 #include <cstring>
 #include "persone3.h"
 
-const int NmaxPers = 1000;
-const int NmaxNome = 20;
-const int NmaxCognome = 30;
-
-//  FUNZIONI
+//  DEFINIZIONE FUNZIONI
 
 void leggi_indirizzo (address &a)
 {

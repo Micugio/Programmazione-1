@@ -4,10 +4,12 @@
 using namespace std;
 #include <iostream>
 
-extern const int NmaxPers;
-extern const int NmaxNome;
-extern const int NmaxCognome;
+//  INIZIALIZZAZIONE COSTANTI
+const int NmaxPers = 1000;
+const int NmaxNome = 20;
+const int NmaxCognome = 30;
 
+//  INIZIALIZZAZIONE STRUTTURE
 struct address {
   char via[NmaxNome];
   int civico;
@@ -28,6 +30,7 @@ struct gruppo {
   persona * cognomi [NmaxPers];
 };
 
+//  DICHIARAZIONE FUNZIONI
 void leggi_indirizzo (address &a);
 void stampa_indirizzo (const address & a);
 void leggi_nome (char s[]);
