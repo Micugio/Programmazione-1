@@ -1,7 +1,7 @@
 using namespace std;
 #include <iostream>
 
-#include "struct_queue.h"
+#include "structqueue.h"
 
 
 static bool emptyp (const queue & Q) 
