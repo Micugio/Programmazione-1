@@ -2,6 +2,8 @@ using namespace std;
 #include <iostream>
 #include "structstack.h"
 
+// COMPILARE CON: g++ structstack.cc structreversemain.cc
+
 int main () 
 {
   char res;

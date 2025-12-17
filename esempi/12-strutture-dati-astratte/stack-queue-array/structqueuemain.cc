@@ -1,7 +1,8 @@
 using namespace std;
 #include <iostream>
-#include "struct_queue.h"
+#include "structqueue.h"
 
+// COMPILARE CON: g++ structqueue.cc structqueuemain.cc
 
 int main () 
 {
