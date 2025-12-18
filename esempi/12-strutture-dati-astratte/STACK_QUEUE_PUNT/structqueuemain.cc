@@ -4,6 +4,9 @@ using namespace std;
 
 // COMPILARE CON: g++ structqueue.cc structqueuemain.cc
 
+// NOTA:
+// STACK_QUEUE_PUNT/structqueuemain.cc == STACK_QUEUE_ARRAY/structqueuemain.cc
+
 int main () 
 {
   char res;

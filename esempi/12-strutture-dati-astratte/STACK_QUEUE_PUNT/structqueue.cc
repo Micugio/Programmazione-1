@@ -62,6 +62,18 @@ retval dequeue(queue & Q)
   return res;
 }
 
+// VERSIONE CON WHILE
+void print(const queue& Q)
+{
+    node* first = Q.head;
+    while (first != NULL) {
+        cout << first->val << endl;
+        first = first->next;
+    }
+}
+
+/*
+// VERSIONE CON DO-WHILE
 void print(const queue & Q) 
 { 
   if (!emptyp(Q)) {
@@ -72,6 +84,7 @@ void print(const queue & Q)
     } while (first != NULL);
   }
 }
+*/
 
 void deinit(queue & Q) {
   while (!emptyp(Q))
