@@ -1,7 +1,7 @@
 using namespace std;
 #include <iostream>
 
-#include "struct_stack.h"
+#include "structstack.h"
 
 
 static bool emptyp (const stack & s) {

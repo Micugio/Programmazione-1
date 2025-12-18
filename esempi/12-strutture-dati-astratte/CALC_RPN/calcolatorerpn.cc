@@ -1,6 +1,6 @@
 #include "entry.h"
 #include "stack.h"
-#include "calcolatore_rpn.h"
+#include "calcolatorerpn.h"
 
 static void Cancella()
 { // Stampa 10 new line per simulare clean del terminale

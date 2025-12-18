@@ -4,17 +4,17 @@
 using namespace std;
 #include <iostream>
 
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <cerrno>
-#include <ctype.h>
+#include <cctype>
 
 
-const int MaxDim = 20;
+const int MaxDim = 40;
 
-enum EntryType {OPERATOR,NUM,OPEN,CLOSE};
+enum EntryType {OPERATOR,NUM,OFF};
 enum Operator {PLUS, MINUS, TIMES, DIVIDE};
-
 enum retval {FAIL,OK};
 
 struct entry 
@@ -25,15 +25,10 @@ struct entry
 };
 
 
-bool operatorp (const entry &);
-bool openp (const entry &);
-bool closep (const entry &);
-bool nump (const entry &);
-
+int offp (const entry &);
+int operatorp (const entry &);
 void print_entry (const entry &);
 retval read_entry (entry &);
-
-double apply_operator(const entry & e1, const entry & e2, const entry & op);
+entry calcola(const entry & , const entry & , const entry & );
 
 #endif
-

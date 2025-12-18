@@ -4,7 +4,7 @@
 using namespace std;
 
 #include "message.h"
-#include "struct_queue.h"
+#include "structqueue.h"
 
 const int MaxPriority = 10;
 

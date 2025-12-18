@@ -1,4 +1,4 @@
-#include "prio_queue.h"
+#include "prioqueue.h"
 
 void priority_queue_init(priority_queue & pq)
 {

@@ -1,5 +1,5 @@
 #include "message.h"
-#include "struct_queue.h"
+#include "structqueue.h"
 
 static int next(int index)
 {

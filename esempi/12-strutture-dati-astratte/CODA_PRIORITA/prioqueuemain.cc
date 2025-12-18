@@ -2,8 +2,8 @@ using namespace std;
 #include <iostream>
 
 #include "message.h"
-#include "struct_queue.h"
-#include "prio_queue.h"
+#include "structqueue.h"
+#include "prioqueue.h"
 
 
 int main()
