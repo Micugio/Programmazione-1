@@ -148,3 +148,7 @@ Gli array vengono passati per riferimento alla funzione (cioè sono dei puntator
 Quando passi un array a una funzione, diventa un puntatore, la dimensione si perde.
 Negli array 1D il compilatore non ha bisogno della dimensione, semplicemente gli scorre tutti un numero stabilito di volte (dim).
 Negli array 2D invece DEVE sapere la dimensione della riga, serve la seconda dimensione (DIM2) che indica il numero di colonne (cioè gli elementi di ogni riga prima di dover passare alla riga successiva).
+
+## Stringhe
+- cin.getline(s, DIM) -> legge
+...

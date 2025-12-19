@@ -8,9 +8,9 @@ using namespace std;
 
 int main()
 {
-  char ch, pre = '\0';
+  char ch, pre = ' ';  // NOTA: pre = ' ', così diventa maiuscola anche la prima lettera della prima parola.
   while (cin.get(ch)) {
-    if (pre == ' ' || pre == '\n') 
+    if (pre == ' ' || pre == '\n')  // (Se carattere precedente è uno spazio o un a capo)
        cout.put(char(toupper(ch)));
     else 
        cout.put(ch);

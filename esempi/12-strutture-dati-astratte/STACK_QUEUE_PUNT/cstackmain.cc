@@ -67,6 +67,25 @@ bool uncouple(Stack & s, char c) {
   return result;
 }
 
+// IDEA: Svuoto lo stack ricorsivamente con Pop (inoltre ad prima di ogni Pop faccio una Top per salvarmi il valore in una variabile temp (char r)) 
+//       e lo ricostruisco mentre risalgo con Push controllando ogni volta se il char salvato (r) è uguale al char che cerco (c), se è uguale non faccio la Push.
+void uncouple_ric(Stack & s, char c) {
+    if (StackIsEmpty(s)) return;
+    char r;
+    Top(s, r); 
+    Pop(s);
+    uncouple_ric(s, c);
+    if (r != c) Push(s, r);
+}
+/*
+COMPORTAMENTO:
+La ricorsione viene sempre chiamata.
+La decisione (r != c) viene fatta in risalita.
+Lo stack viene:
+- completamente svuotato.
+- ricostruito senza gli elementi uguali a c.
+*/
+
 
 void test_uncouple() {
   Stack s1 = StackInit();
@@ -80,6 +99,8 @@ void test_uncouple() {
 
   Print(s1);
   uncouple(s1, 'd');
+  Print(s1);
+  uncouple_ric(s1, 'c');
   Print(s1);
   StackDeinit(s1);
 }

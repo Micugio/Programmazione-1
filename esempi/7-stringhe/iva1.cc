@@ -12,7 +12,7 @@ int main (int argc, char * argv[])
   float aliquota = 22;
   float val;
 
-  if (argc==1){   //(input nessun argomento)
+  if (argc==1){   //(input nessun argomento, solo ./a.out)
     cout << "Valore? ";
     cin >> val;
   }

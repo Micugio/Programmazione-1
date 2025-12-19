@@ -4,7 +4,7 @@
 
 using namespace std;
 #include <iostream>
-const int DIM=5;
+const int DIM=20;
 
 int main()
 {
