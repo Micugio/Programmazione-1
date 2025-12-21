@@ -6,8 +6,8 @@ int punteggio (char str[]) {
 
   for (int k = 1; str[k] != '\0'; k++) {
     if (k == 0) {
-      if ((str[k] > 'a' && str[k] < 'z') || (str[k] > 'A' && str[k] < 'Z')) {
-        if (str[k] > 'A' && str[k] < 'Z') {
+      if ((str[k] >= 'a' && str[k] <= 'z') || (str[k] >= 'A' && str[k] <= 'Z')) {
+        if (str[k] >= 'A' && str[k] <= 'Z') {
           str[k] += 'a'-'A';
         }
       }
@@ -17,8 +17,8 @@ int punteggio (char str[]) {
       }
     }
     else {
-      if ((str[k] > 'a' && str[k] < 'z') || (str[k] > 'A' && str[k] < 'Z')) {
-        if (str[k] > 'A' && str[k] < 'Z') {
+      if ((str[k] >= 'a' && str[k] <= 'z') || (str[k] >= 'A' && str[k] <= 'Z')) {
+        if (str[k] >= 'A' && str[k] <= 'Z') {
           str[k] += 'a'-'A';
         }
         if (str[k-1] >= str[k]) {
