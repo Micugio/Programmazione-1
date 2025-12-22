@@ -8,7 +8,7 @@ int main (int argc, char * argv[]) {
   char c;
 
   if (argc!=2) {
-    cerr << "Usage: ./a.out <sourcefile> <targetfile>\n";
+    cerr << "Usa: ./a.out <fileinput>\n";
     exit(0);
   }
 

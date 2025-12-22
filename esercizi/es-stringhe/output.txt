@@ -1,0 +1,5 @@
+scriv?r? un programma ch? 
+pr?nda in input un t?sto. ? g?n?ri lo st?sso t?sto dov? ogni s?parator? sia.
+Conv?rtito in un . 
+unico. 
+blank . ciao 

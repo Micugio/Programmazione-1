@@ -11,21 +11,32 @@ int main() {
     int B = 0;
     int C = 0;
 
+    int idA = 1;
+    int idB = 2;
+    int idC = 3;
+
     double saltoA, saltoB, saltoC;
+
+    srand(time(NULL));
 
     for (int i=0; i<10; i++) {
         saltoA = jump();
+        //cout << "saltoA: " << saltoA << endl;
+
         saltoB = jump();
+        //cout << "saltoB: " << saltoB << endl;
+
         saltoC = jump();
+        //cout << "saltoC: " << saltoC << endl;
 
         
-        if (round(saltoA, saltoB, saltoC) == A) {
+        if (round(saltoA, saltoB, saltoC) == 1) {
             ++A;
         }
-        if (round(saltoA, saltoB, saltoC) == B) {
+        if (round(saltoA, saltoB, saltoC) == 2) {
             ++B;
         }
-        if (round(saltoA, saltoB, saltoC) == C) {
+        if (round(saltoA, saltoB, saltoC) == 3) {
             ++C;
         }
     }
@@ -37,8 +48,6 @@ int main() {
 
 double jump () {
     double salto;
-
-    srand(time(NULL));
 
     /*
     rand() % 201 → numero tra 0 e 200
@@ -56,14 +65,14 @@ int round (double saltoA, double saltoB, double saltoC) {
     int risultato;
     if (saltoA > saltoB) {
         if (saltoA > saltoC) {
-            risultato = A;
+            risultato = 1;
         }
     }
     else if (saltoB > saltoC) {
-        risultato = B;
+        risultato = 2;
     }
     else {
-        risultato = C;
+        risultato = 3;
     }
     return risultato;
 }
