@@ -2,6 +2,10 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
+// CONSEGNA: copia e incolla da file a stream
+
+// ESEGUIRE CON:   ./a.out testo.txt
+
 int main (int argc, char * argv[]) {
   fstream myin;
   

@@ -36,7 +36,7 @@ int main (int argc, char * argv[]) {
      exit(0);
   }
 
-  while (myin.get(c)) { // Finche che lo stream "myin" legge un carattere dal file allora "myout" lo stampa nell'altro file (copia e incolla)
+  while (myin.get(c)) { // Finchè che lo stream "myin" legge un carattere dal file ALLORA si esegue ciclo While
     if (c==oldlettera) {
       c = newlettera;
     }
