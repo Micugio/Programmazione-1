@@ -2,7 +2,7 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
-// CONSEGNA: copia e incolla da file a stream
+// CONSEGNA: copia e incolla DA file in input da riga di comando A output terminale
 
 // ESEGUIRE CON:   ./a.out testo.txt
 

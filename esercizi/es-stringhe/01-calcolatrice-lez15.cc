@@ -2,6 +2,8 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 
+// CONSEGNA: leggere in input da riga di comando due numeri e un operatore, eseguire il calcolo.
+
 int main (int argc, char * argv[]) {
   
   double risultato, n1, n2;

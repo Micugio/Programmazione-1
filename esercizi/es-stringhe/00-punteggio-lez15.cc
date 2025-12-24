@@ -1,6 +1,8 @@
 using namespace std;
 #include <iostream>
 
+// CONSEGNA: leggere stringa in input da terminale e contare distanza assoluta tra coppie di caratteri.
+
 int punteggio (char str[]) {
   int risultato = 0;
 

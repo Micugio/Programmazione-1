@@ -3,6 +3,8 @@ using namespace std;
 #include <fstream>
 #include <cstdlib>
 
+// CONSEGNA: prendere due file in input da riga di comando e stampare su un terzo file (in output da riga di comando) i caratteri alternati dei file di input.
+
 // ESEGUIRE CON:   ./a.out A.txt B.txt C.txt
 
 int main (int argc, char * argv[]) {

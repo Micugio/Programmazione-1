@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Es. funziona ma non corretto, es. giusto è inverti-num.cc (nella cartella es-base)
+// Es. funziona ma non corretto (stampa i numeri invertiti sull'output, non crea il numero invertito), es. giusto è inverti-num.cc (nella cartella es-base)
 
 void inverti (int & k);
 

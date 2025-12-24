@@ -3,6 +3,10 @@ using namespace std;
 #include <fstream>
 #include <cstdlib>
 
+// CONSEGNA: leggere un file in input da riga di comando, file contiene numeri double divisa da virgola, fare la somma e la media dei numeri.
+
+// ESEGUIRE CON:   ./a.out es4-file.txt
+
 int main (int argc, char * argv[]) {
   fstream myin;
   
@@ -11,6 +15,8 @@ int main (int argc, char * argv[]) {
   char c;
   int n_str = 0;
   int n_array = 0;
+  double somma = 0;
+  double media = 0;
 
 
   // RICORDA: argc = numero di elementi (parole) da input.
@@ -49,8 +55,13 @@ int main (int argc, char * argv[]) {
 
   for (int k = 0; k <= n_array; k++) {  // NOTA: se USO (n_array++) DEVO cambiare operatore condizione con (<).
     cout << array[k] << " ";
+    somma += array[k];
   }
   cout << endl;
+  cout << "Somma = " << somma << endl;
+
+  media = somma / (n_array + 1);  // NOTA: n_array indica ultimo indice dell'array, QUINDI per sapere quanti numeri contiene array devo fare +1 (così conto anche l'indice 0 dell'array).
+  cout << "Media = " << media << endl;
 
   myin.close();
 

@@ -2,6 +2,10 @@ using namespace std;
 #include <iostream>
 #include <fstream>
 
+// CONSEGNA: leggere file di input (da riga di comando) e scrivere su file di output (da riga di comando) sostituendo ogni occorenza di un carattere scelto con un altro carattere scelto.
+
+// ESEGUIRE CON:   ./a.out 02-input.txt 02-output.txt
+
 int main (int argc, char * argv[]) {
   fstream myin, myout;
   
