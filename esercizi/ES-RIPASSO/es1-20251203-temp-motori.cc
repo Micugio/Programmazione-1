@@ -57,6 +57,27 @@ int main (int argc, char * argv[]) {
   }
   cout << superato << endl;
 
+/*
+  while(f1 >> v1 && f2 >> v2) {
+      sumv1 += v1;
+      sumv2 += v2;
+      if (v1 > v2)
+          pnum++;
+      num++;
+  }
+
+  ///////////////////////////////////////
+  
+  f1 >> v1;
+  f2 >> v2;
+  while(!f1.eof()) {
+    if (v1 > v2)
+        pnum++;
+    num++;
+    f1 >> v1;
+    f2 >> v2;
+  }
+  */
 
   myin1.close();
   myin2.close();
