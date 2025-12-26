@@ -8,11 +8,11 @@ using namespace std;
 double Percentuale (int superato, int totale);
 
 int main (int argc, char * argv[]) {
-  fstream myin1, myin2;
+  fstream f1, f2;
   
   char ch;
-  double temp1 = 0.0;
-  double temp2 = 0.0;
+  double t1 = 0.0;
+  double t2 = 0.0;
   int superato = 0;
 
   // RICORDA: argc = numero di elementi (parole) da input.
@@ -21,66 +21,45 @@ int main (int argc, char * argv[]) {
     exit(0);
   }
 
-  myin1.open(argv[1],ios::in);
+  f1.open(argv[1],ios::in);
 
-  if (myin1.fail()) {
+  if (f1.fail()) {
     cerr << "Il file " << argv[1] << " non esiste\n";
     exit(0); // NOTA: Non serve chiudere lo stream myin1, non è mai stato aperto perché è andato in errore
   }
 
-  myin2.open(argv[2],ios::in);
+  f2.open(argv[2],ios::in);
 
-  if (myin2.fail()) {
+  if (f2.fail()) {
     cerr << "Il file " << argv[2] << " non esiste\n";
-    myin1.close();
+    f1.close();
     exit(0);
   }
   
-  myin1 >> temp1;
-  myin2 >> temp2;
-  cout << temp1 << endl;
-  cout << temp2 << endl;
-  cout << endl;
-  if (temp1 > temp2) {
-    ++superato;
-  }
-
-  while (!myin1.eof()) {
-    myin1 >> temp1;
-    myin2 >> temp2;
-    cout << temp1 << endl;
-    cout << temp2 << endl;
-    cout << endl;
-    if (temp1 > temp2) {
-        ++superato;
-    }
-  }
-  cout << superato << endl;
-
-/*
-  while(f1 >> v1 && f2 >> v2) {
+  /*
+  ALTRA VERSIONE MIGLIORE (funziona perchè so che ci sono solo valori double e ogni valore è su una riga senza spazi, QUINDI non serve fare controlli)
+  while(f1 >> v1 && f2 >> v2) {  // Fino a quando leggo da uno o altro, basterebbe anche uno però non farei comando....FINIRE
       sumv1 += v1;
       sumv2 += v2;
       if (v1 > v2)
           pnum++;
       num++;
   }
+*/
 
-  ///////////////////////////////////////
-  
-  f1 >> v1;
-  f2 >> v2;
-  while(!f1.eof()) {
-    if (v1 > v2)
-        pnum++;
-    num++;
-    f1 >> v1;
-    f2 >> v2;
+  // Prima faccio una lettera iniziale ALTRIMENTI non posso usare eof()
+  f1 >> t1;
+  f2 >> t2;
+  while (!f1.eof()) {  // Basta controllare se il file è terminato (non serve fail() perchè ci sono solo double)
+    if (t1 > t2) {
+      ++superato;
+    }
+    f1 >> t1; // continuo a leggere da entrambi i file (NOTA: il puntatore ricorda la posizione in cui è arrivato ad ogni chiamata)
+    f2 >> t2;
   }
-  */
 
-  myin1.close();
-  myin2.close();
+  f1.close();
+  f2.close();
 
   return 0;
 }
