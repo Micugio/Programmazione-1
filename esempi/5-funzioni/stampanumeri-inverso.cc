@@ -1,17 +1,13 @@
 using namespace std;
 #include <iostream>
 
-void stampa1 (int n, int m) { // m=0,m+1,m+2,...,m=n
-  if (m>n)
+void stampa (int n) { // m=0,m+1,m+2,...,m=n
+  if (n<0)
     cout << endl;
   else {
-    cout << m << " ";
-    stampa1(n, m+1);
+    cout << n << " ";
+    stampa(n-1);
   }
-}
-
-void stampa (int n) {
-  stampa1 (n,0);
 }
 
 int main() {
