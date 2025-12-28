@@ -15,12 +15,14 @@ void stampa (int n) {
 }
 
 
-int main()
-{
+int main() {
   int n;
+
   cout << "n? ";
   cin >> n;
+
   cout << "stampanumeri(" << n << ") = \n";
   stampa(n);
-return 0;
+
+  return 0;
 }
