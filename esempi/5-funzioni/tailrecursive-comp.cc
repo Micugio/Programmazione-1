@@ -10,9 +10,9 @@ using namespace std;
 
 const int MAX = 10000000;
 
-long long sum (int n) 
-{
+long long sum (int n) {
   long long res;
+
   if (n==0) 
     res = 0;
   else
@@ -20,9 +20,9 @@ long long sum (int n)
   return res;
 }
 
-int main() 
-{
+int main() {
   cout << "sum(" << MAX << ") = " << sum(MAX) << endl;
-return 0;
+  
+  return 0;
 }
 

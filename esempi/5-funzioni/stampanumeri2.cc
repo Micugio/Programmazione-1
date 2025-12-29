@@ -1,11 +1,13 @@
 using namespace std;
 #include <iostream>
 
+// RIVEDI BENE con ChatGPT, NON HO CAPITO.
+
 void stampa1 (int m, int n) { // m,m+1,...,n-1,n
   if (m<=n) { 
-    stampa1(m,(n+m)/2-1);
+    stampa1(m, ((n+m)/2)-1);
     cout << (n+m)/2 << " ";
-    stampa1((n+m)/2+1,n);
+    stampa1(((n+m)/2)+1, n);
   }
 } 
 
@@ -20,7 +22,7 @@ int main() {
   cout << "n? ";
   cin >> n;
 
-  cout << "stampanumeri(" << n << ") = \n";
+  cout << "stampanumeri(" << n << ") = \n"; // NOTA: questa riga stampa solo questo output, non stampa tutti i numeri.
   stampa(n);
 
   return 0;

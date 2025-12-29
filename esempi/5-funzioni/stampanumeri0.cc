@@ -10,11 +10,6 @@ void stampa1 (int n, int m=0) { // m=0,m+1,m+2,...,m=n
   }
 }
 
-// Inutile in questo esempio:
-void stampa (int n) {
-  stampa1 (n,0);
-}
-
 int main() {
   int n;
 

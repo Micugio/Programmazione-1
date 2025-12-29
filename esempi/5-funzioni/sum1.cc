@@ -5,17 +5,15 @@ using namespace std;
 // realizzare ricorsivamente 
 // la somma di due numeri avendo a disposizione incrermento 
 // e decremento ++x e --x
-// versione iterativa
 
 int somma (int n, int m) {
   int res;
-
-  while (! m==0) {
+  if (m==0) 
+    return n;
+  else {
     ++n; --m;
+    return somma(n,m);
   }
-  res = n;
-
-  return res;
 }
 
 int main() {
@@ -28,4 +26,3 @@ int main() {
 
   return 0;
 }
-

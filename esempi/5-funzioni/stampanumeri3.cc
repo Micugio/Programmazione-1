@@ -4,7 +4,7 @@ using namespace std;
 // stampa i numeri da m a n
 void stampa (int m, int n) { // m,m+1,...,n-1,n
   if (m>n)
-    cout << endl;
+    cout << endl; // CASO BASE: va a capo dopo aver stampato la sequenza di numeri
   else {
     cout << m << " ";
     m++;

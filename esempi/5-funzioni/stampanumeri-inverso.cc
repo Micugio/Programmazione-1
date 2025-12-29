@@ -1,6 +1,6 @@
 using namespace std;
 #include <iostream>
-/*
+
 // VERSIONE PROF:
 void stampa_inv1 (int n, int m=0) { // m=0,m+1,m+2,...,m=n
   if (m>n)
@@ -10,15 +10,16 @@ void stampa_inv1 (int n, int m=0) { // m=0,m+1,m+2,...,m=n
     cout << m << " ";
   }
 }
-*/
 
-// VERSIONE PROF:
+/*
+// LA MIA VERSIONE ispirata al PROF:
 void stampa_inv1 (int n, int m=0) { // m=0,m+1,m+2,...,m=n
   if (m<=n) {
     stampa_inv1(n, m+1);
     cout << m << " ";
   }
 }
+*/
 
 // LA MIA VERSIONE:
 void stampa_inv2 (int n) { // m=0,m+1,m+2,...,m=n

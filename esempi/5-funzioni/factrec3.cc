@@ -7,18 +7,13 @@ long long fatt1 (int m, int n) { // calcola m*m+1*...*n
   else return m*fatt1(m+1,n);
 }
 
-long long fatt (int n) {
-  return fatt1 (1,n);
-}
-
-
 int main() {
   int n;
 
   cout << "n? ";
   cin >> n;
 
-  cout << "fattoriale(" << n << ") = " << fatt(n) << endl;
+  cout << "fattoriale(" << n << ") = " << fatt1(1,n) << endl;
 
   return 0;
 }
