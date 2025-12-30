@@ -5,6 +5,7 @@ using namespace std;
 // realizzare ricorsivamente 
 // la somma di due numeri avendo a disposizione incrermento 
 // e decremento ++x e --x
+// VERSIONE RICORSIVA (con return)
 
 int somma (int n, int m) {
   int res;
