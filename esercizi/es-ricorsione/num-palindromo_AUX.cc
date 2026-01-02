@@ -1,30 +1,32 @@
 #include <iostream>
 using namespace std;
 
-// NOTA: questa funzione ricorsiva
+// Es. UGUALE a num-palindromo.cc SOLO fatto anche con funzione_aux.
 
-// Inverte il numero
-int palindromo (int n, int val) {
+// Funzione tail recursive che inverte il numero originale.
+int palindromo_aux (int n, int val) {
     if (n <= 0) {
         return val;
     }
     else {
         val = (val * 10) + (n % 10);
-        return palindromo(n/10, val);
+        return palindromo_aux(n/10, val);
     }
 }
 
-bool palindromo (int n, int val) {
-    palindromo = inverti_ric(n, val);
-    cout << n << endl;
-    cout << palindromo << endl;
+// Restituisce true o false se il numero invertito è uguale al numero originale (= palindromo).
+bool palindromo (int n) {
+    int val = 0;
+    int palindromo = 0;
 
+    palindromo = palindromo_aux(n, val);
+    cout << "(" << palindromo << ")" << endl;
 
-    if (n == palindromo) {
-        cout << "Il numero " << n << " É palindromo!" << endl;
+    if (palindromo_aux(n, val) == n) {
+        return true;
     }
     else {
-        cout << "Il numero " << n << " NON è palindromo!" << endl;
+        return false;
     }
 }
 
@@ -32,26 +34,21 @@ bool palindromo (int n, int val) {
 
 int main() {
     int n = 0;
-    int val = 0;
-    int palindromo = 0;
+    bool risposta;
     
-    do { // Ti fa inserire in continuazione un numero finchè quest'ultimo è un numero intero positivo
+    do { // Ti fa inserire in continuazione un numero finchè quest'ultimo è un numero intero positivo.
         cout << "Inserisci un numero intero positivo: ";
         cin >> n;
     } while (n<0);
 
-/*
-    palindromo = inverti_ric(n, val);
-    cout << n << endl;
-    cout << palindromo << endl;
+    risposta = palindromo(n);
 
-    if (n == palindromo) {
-        cout << "Il numero " << n << " É palindromo!" << endl;
+    if (risposta) {
+        cout << "Il numero É palindromo!" << endl;
     }
     else {
-        cout << "Il numero " << n << " NON è palindromo!" << endl;
+        cout << "Il numero NON è palindromo!" << endl;
     }
-*/
 
     return 0;
 }

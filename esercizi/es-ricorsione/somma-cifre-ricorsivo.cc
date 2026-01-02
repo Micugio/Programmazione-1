@@ -25,8 +25,6 @@ int main() {
 
 
 
-
-
 /*
 // VERSIONE con variabile di appoggio per return  (NON USARE QUESTA VERSIONE!!!)
 // NOTA: val NON è una variabile per accumulare il risultato ad ogni passo ricorsivo, è solo un supporto per il return in modo da scrivere il codice più ordinato.

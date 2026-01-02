@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Consegna: Stampa in sequenza numeri da 0 a n, prima numeri pari in ordine crescente, poi numeri dispari in ordine decrescente.
+// CONSEGNA: Stampa in sequenza numeri da 0 a n, prima numeri pari in ordine crescente, poi numeri dispari in ordine decrescente.
 
 void funzione (int i, int n) {
     

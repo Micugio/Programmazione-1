@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
 
-// NOTA: questa funzione ricorsiva 
+// NOTA: questa funzione ricorsiva è tail recursive (può avere return con accumulatore), cioè costruisce il numero inverso durante l'andata della chiamata ricorsiva, 
+//       in pratica il return con la chiamata ricorsiva esegue il loop la ricorsione fino a quando non si arriva al caso base.
 
 int inverti_ric (int n, int val) {
     if (n <= 0) {
@@ -9,7 +10,7 @@ int inverti_ric (int n, int val) {
     }
     else {
         val = (val * 10) + (n % 10);
-        return inverti_ric(n/10, val);
+        return inverti_ric(n/10, val); // Tail Recursive da questa riga, non ci sono altri calcoli (al ritorno) dopo la chiamata.
     }
 }
 
@@ -18,7 +19,7 @@ int main() {
     int val = 0;
     int palindromo = 0;
     
-    do { // Ti fa inserire in continuazione un numero finchè quest'ultimo è un numero intero positivo
+    do { // Ti fa inserire in continuazione un numero finchè quest'ultimo è un numero intero positivo.
         cout << "Inserisci un numero intero positivo: ";
         cin >> n;
     } while (n<0);
