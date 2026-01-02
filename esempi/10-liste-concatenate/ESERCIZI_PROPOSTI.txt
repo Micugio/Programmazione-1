@@ -11,7 +11,7 @@ ESERCIZI PROPOSTI
   (cio\`e, una nuova lista che contiene le stesse informazioni nello
   stesso ordine).
 
-* Scrivere una funzione che sposti l’elemento pi\`u grande di una
+* Scrivere una funzione che sposti l’elemento più grande di una
   lista concatenata nell'ultimo nodo della lista.
 
 * Scrivere una funzione che sposti l'elemento più piccolo di una lista
