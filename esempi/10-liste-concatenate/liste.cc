@@ -153,26 +153,26 @@ void remove_first(nodo * & s) {
 
 
 void remove_element(nodo * & p, int d) {
- if (p != NULL) {
-   nodo* q = p;
-   if (q->dato == d) {
-     p = p->next;
-     delete q;
-   }
-   else {
-     while(q->next != NULL) {
-       if (q->next->dato == d) {
-	 nodo* r = q->next;
-	 q->next = q->next->next;
-	 delete r;
-	 return;
-       }
-       if (q->next != NULL) {
-	 q=q->next;
-       }
-     }
-   }
- }
+  if (p != NULL) {
+    nodo* q = p;
+    if (q->dato == d) {
+      p = p->next;
+      delete q;
+    }
+    else {
+      while(q->next != NULL) {
+        if (q->next->dato == d) {
+          nodo* r = q->next;
+          q->next = q->next->next;
+          delete r;
+          return;
+        }
+        if (q->next != NULL) {
+          q=q->next;
+        }
+      }
+    }
+  }
 }
 
 
