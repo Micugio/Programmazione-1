@@ -1,10 +1,11 @@
-ESERCIZI PROPOSTI
+ESERCIZI PROPOSTI:
 
 * Scrivere una funzione che determini se l'oggetto t precede un
   dato oggetto x
   - Se x primo elemento ritornare x stesso.
+    -> Cioè devo trovare il valore x e restituire il valore precedente t, però se il valore x è il primo elemento della lista devo restituire lui.
 
-* Scrivere una funzione che ritorni true se un elemento x occorre
+* Scrivere una funzione che ritorni true se un elemento x (numero) occorre
   nella lista, false se l'elemento non occorre.
 
 * Scrivere una funzione che costruisca una copia di una data lista
@@ -22,12 +23,6 @@ ESERCIZI PROPOSTI
   - Diverse soluzioni sono possibili:
     . Side effects sulla lista destinazione.
     . Nuova lista.
-
-* Scrivere una funzione che cancella un elemento x da una lista
-  doppiamente concatenata s.
-
-* Scrivere una funzione che inserisce un elemento x in una lista
-  doppiamente concatenata s.
 
 * Problema di Giuseppe Flavio:
   - Immaginiamo che N persone debbano eleggere un leader.
