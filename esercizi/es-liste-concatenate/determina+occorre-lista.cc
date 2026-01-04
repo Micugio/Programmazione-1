@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cmath>
 using namespace std;
 
 
@@ -32,52 +31,51 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-void remove_element(nodo * & p, int d) {
-  if (p != NULL) {
-    nodo* q = p;
-    if (q->dato == d) {
-      p = p->next;
-      delete q;
+/*
+// FUNZIONE SBAGLIATA
+bool occorre (nodo * s, int n) {
+  while (s != NULL) {
+    if (s->dato == n) {
+      return true;
     }
     else {
-      while(q->next != NULL) {
-        if (q->next->dato == d) {
-          nodo* r = q->next;
-          q->next = q->next->next;
-          delete r;
-          return;
-        }
-        if (q->next != NULL) {
-          q=q->next;
-        }
+      s = s->next;
+      if (s->dato == n) { // ERRORE QUI: ad ogni ciclo controllo due nodi però condizione while vale solo per un nodo, se arrivo a ultimo nodo va in crash.
+        return true;
       }
     }
   }
+  return false;
 }
+*/
 
-bool primalita (int n) {
-  if (n <= 1) {
-    return false;
-  }
-  for (int i = 2; i <= sqrt(n); i++) {
-    if (n % i == 0) {
-      return false;
-    }
-  }
-  return true;
-}
-
-void primizzaLista (nodo * & s) {
-  nodo * q = s;
-  while(q != NULL) {
-    if (!(primalita(q->dato))) {
-      remove_element(s, q->dato);
-      q = s;
+//Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
+bool occorre (nodo * s, int n) {
+  while (s != NULL) {
+    if (s->dato == n) {
+      return true;
     }
     else {
-      q = q->next;
+      s = s->next;
     }
   }
+  return false;
+}
+
+// Funzione cerca un valore nella lista, se lo trova restituisce il valore precedente.
+int determina (nodo * s, int n) {
+  while (s != NULL) {
+    if (s->dato == n) {
+      return n;
+    }
+    else {
+      if (s->next->dato == n) {
+        return s->dato;
+      }
+      s = s->next;
+    }
+  }
+  return 0;
 }
 
 // Stampa contenuto della lista
@@ -97,6 +95,9 @@ int main(int argc, char * argv[]) {
 
   int value = 0;
 
+  int n = 0;
+  int ris = 0;
+  bool condizione;
 
   // RICORDA: argc = numero di elementi (parole) da input.
   if (argc!=2) {
@@ -119,10 +120,21 @@ int main(int argc, char * argv[]) {
   cout << "La lista creata è:" << endl;
   stampa(x);
 
-  
-  primizzaLista(x);
-  cout << "La lista con SOLO numeri primi è:" << endl;
-  stampa(x);
+
+  cout << "Valore target: ";
+  cin >> n;
+
+  condizione = occorre(x, n);
+
+  if (condizione) {
+    cout << "Sì, il valore è presente nella lista!" << endl;
+    ris = determina(x, n);
+    cout << "Ecco il valore precedente al target è: " << ris << endl;
+  }
+  else {
+    cout << "No, il valore non è presente nella lista!" << endl;
+  }
+
 
   return 0;
 }

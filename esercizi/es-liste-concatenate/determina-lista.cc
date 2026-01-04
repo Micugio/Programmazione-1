@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cmath>
 using namespace std;
 
 
@@ -55,29 +54,20 @@ void remove_element(nodo * & p, int d) {
   }
 }
 
-bool primalita (int n) {
-  if (n <= 1) {
-    return false;
-  }
-  for (int i = 2; i <= sqrt(n); i++) {
-    if (n % i == 0) {
-      return false;
-    }
-  }
-  return true;
-}
-
-void primizzaLista (nodo * & s) {
-  nodo * q = s;
-  while(q != NULL) {
-    if (!(primalita(q->dato))) {
-      remove_element(s, q->dato);
-      q = s;
+// Funzione cerca un valore nella lista, se lo trova restituisce il valore precedente.
+int determina (nodo * s, int n) {
+  while (s != NULL) {
+    if (s->dato == n) {
+      return n;
     }
     else {
-      q = q->next;
+      if (s->next->dato == n) {
+        return s->dato;
+      }
+      s = s->next;
     }
   }
+  return 0;
 }
 
 // Stampa contenuto della lista
@@ -96,7 +86,8 @@ int main(int argc, char * argv[]) {
   nodo * x = NULL;
 
   int value = 0;
-
+  int n = 0;
+  int ris = 0;
 
   // RICORDA: argc = numero di elementi (parole) da input.
   if (argc!=2) {
@@ -119,10 +110,19 @@ int main(int argc, char * argv[]) {
   cout << "La lista creata è:" << endl;
   stampa(x);
 
-  
-  primizzaLista(x);
-  cout << "La lista con SOLO numeri primi è:" << endl;
-  stampa(x);
 
+  cout << "Inserisci valore target presente nella lista: ";
+  cin >> n;
+
+  ris = determina(x, n);
+
+  if (ris == 0) {
+    cout << "Valore target non presente!"<< endl;
+  }
+  else {
+    cout << "Ecco il valore precedente al target è: " << ris << endl;
+  }
+
+  
   return 0;
 }
