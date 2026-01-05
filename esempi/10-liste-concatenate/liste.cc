@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 // Struttura lista di interi
@@ -8,6 +7,7 @@ struct nodo {
   nodo * next;
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Calcolo della lunghezza di una lista (funzione iterativa)
 int length(nodo * s) {  // NOTA: SEMPRE passaggio per valore, per riferimento perdo accesso a lista (perchè nodo iniziale s (head) alla fine della funzione punterà a null, cioè avrò una lista vuota senza nodi)
@@ -26,6 +26,7 @@ int length_ric(nodo * s) { // NOTA: passaggio per valore perchè voglio solo con
   return 1 + length_ric(s->next);
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Dealloca la memoria della lista (funzione iterativa, passaggio per riferimento)
 void delete_list(nodo * & s) {   // Passaggio per riferimento
@@ -76,6 +77,7 @@ DOPO funzione DEVO AGGIUNGERE nel main:
 s = nullptr;  // Puntatore head diventa nullptr
 */
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Stampa contenuto della lista
 void stampa(nodo * s) {
@@ -86,6 +88,7 @@ void stampa(nodo * s) {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void insert_first(nodo * &s, int d) {
   // Creo il nuovo nodo e memorizzo il valore utilizzando costruttore
@@ -98,6 +101,7 @@ void insert_first(nodo * &s, int d) {
   s = n;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void insert_last(nodo * & s, int d) {
   nodo * n = new nodo;
@@ -120,6 +124,7 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void insert_order(nodo * & s, int d) {
   if ((s == NULL) || (s->dato >= d)) {
@@ -142,6 +147,7 @@ void insert_order(nodo * & s, int d) {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void remove_first(nodo * & s) {
   if (s != NULL) {
@@ -151,7 +157,9 @@ void remove_first(nodo * & s) {
   }
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// VERSIONE ITERATIVA: Rimuove il nodo che contiene il valore cercato (d).
 void remove_element(nodo * & p, int d) {
   if (p != NULL) {
     nodo* q = p;
@@ -175,8 +183,22 @@ void remove_element(nodo * & p, int d) {
   }
 }
 
+// VERSIONE RICORSIVA: Rimuove il nodo che contiene il valore cercato (d).
+void remove_element(nodo* &p, int d) {
+    if (p == NULL) return;        // lista vuota, niente da fare
 
-// Reverse con side effect sulla lista originaria
+    if (p->dato == d) {           // il nodo corrente è quello da eliminare
+        nodo* temp = p;
+        p = p->next;              // aggiorno il puntatore alla lista
+        delete temp;              // libero la memoria
+    } else {
+        remove_element(p->next, d); // ricorsione sul prossimo nodo
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// VERSIONE ITERATIVA: Reverse con side effect sulla lista originaria.
 nodo * reverse(nodo * x) {
    nodo * t;
    nodo * y = x;
@@ -191,8 +213,24 @@ nodo * reverse(nodo * x) {
    return r;
 }
 
+// VERSIONE RICORSIVA: Reverse con side effect sulla lista originaria.
+// Funzione ausiliaria ricorsivo con accumulatore
+nodo* reverse_aux(nodo* x, nodo* r) {
+    if (x == NULL) return r; // caso base: lista finita
+    nodo* t = x->next;       // salvo il prossimo nodo
+    x->next = r;             // inserisco x in testa all'accumulatore
+    return reverse_aux(t, x); // ricorsione sul resto della lista
+}
 
-// Costruzione della lista rovesciata costruendo una lista nuova
+// Funzione principale
+nodo* reverse_ric(nodo* x) {
+    return reverse_aux(x, NULL);
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// VERSIONE ITERATIVA: Costruzione della lista rovesciata costruendo una lista nuova.
 nodo * reverse_copia(nodo * x) {
   nodo * r = NULL;
 
@@ -205,8 +243,24 @@ nodo * reverse_copia(nodo * x) {
   return r;
 }
 
+// VERSIONE RICORSIVA: Costruzione della lista rovesciata costruendo una lista nuova.
+// Funzione ausiliaria con accumulatore
+nodo* reverse_copia_aux(nodo* x, nodo* r) {
+    if (x == NULL) return r; // caso base: lista finita, ritorno accumulatore
+    nodo* t = new nodo;      // creo copia del nodo corrente
+    t->dato = x->dato;
+    t->next = r;             // inserisco in testa all'accumulatore
+    return reverse_copia_aux(x->next, t); // ricorsione sul resto
+}
 
-// Ricerca a e ritorna l'elemento n-esimo se esite
+// Funzione principale
+nodo* reverse_copia_ric(nodo* x) {
+    return reverse_copia_aux(x, NULL);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// VERSIONE ITERATIVA: Ricerca a e ritorna l'elemento n-esimo se esite.
 nodo * get_n(nodo * s, int n) {
   // Se richiedo di prendere elemento con indice negativo ritorno NULL
   if (n < 0) return NULL;
@@ -221,8 +275,16 @@ nodo * get_n(nodo * s, int n) {
   return s;
 }
 
+// VERSIONE RICORSIVA: Ricerca a e ritorna l'elemento n-esimo se esite.
+nodo* get_n_ric(nodo* s, int n) {
+    if (s == NULL || n < 0) return NULL; // lista vuota o indice negativo
+    if (n == 0) return s;                // abbiamo raggiunto il nodo richiesto
+    return get_n(s->next, n - 1);        // ricorsione sul nodo successivo
+}
 
-// Ritornare il nodo che precede un nodo x
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// VERSIONE ITERATIVA: Ritornare il nodo che precede un nodo x.
 nodo * prec(nodo * s, nodo * x) {
   // primo ed unico elemento uguale a x
   if (s == x) return x;
@@ -246,13 +308,27 @@ nodo * prec(nodo * s, nodo * x) {
   return t;
 }
 
+// VERSIONE RICORSIVA: Ritornare il nodo che precede un nodo x.
+nodo* prec_ric(nodo* s, nodo* x) {
+    if (s == NULL || s->next == NULL) {
+        // Lista vuota o ultimo elemento senza successivo
+        return NULL;
+    }
+    if (s->next == x) {
+        // Il prossimo nodo è x, quindi s è il precedente
+        return s;
+    }
+    // Ricorsione sul nodo successivo
+    return prec(s->next, x);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 nodo  * concat_se_ricorsiva(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
   s1->next = concat_se_ricorsiva(s1->next, s2);
   return s1;
 }
-
 
 nodo  * concat_se_iterativa(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
@@ -268,6 +344,7 @@ nodo  * concat_se_iterativa(nodo  * s1, nodo  * s2) {
   return s1;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 nodo  * copy_seq(nodo  * s) {
   if (s == NULL) return NULL;
@@ -277,6 +354,7 @@ nodo  * copy_seq(nodo  * s) {
   return t;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 nodo  * concat_nose(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return copy_seq(s2);
@@ -294,7 +372,6 @@ nodo  * concat_nose(nodo  * s1, nodo  * s2) {
   return cs1;
 }
 
-
 nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
   if (s1 == NULL) return copy_seq(s2);
 
@@ -304,8 +381,8 @@ nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
   return t;
 }
 
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int main() {
   nodo * L1 = NULL;

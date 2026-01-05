@@ -31,23 +31,6 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-/*
-// FUNZIONE SBAGLIATA (occorre)
-bool occorre (nodo * s, int n) {
-  while (s != NULL) {
-    if (s->dato == n) {
-      return true;
-    }
-    else {
-      s = s->next;
-      if (s->dato == n) { // ERRORE QUI: ad ogni ciclo controllo due nodi però condizione while vale solo per un nodo, se arrivo a ultimo nodo va in crash.
-        return true;
-      }
-    }
-  }
-  return false;
-}
-*/
 
 //Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
 bool occorre (nodo * s, int n) {
@@ -62,23 +45,6 @@ bool occorre (nodo * s, int n) {
   return false;
 }
 
-/*
-// FUNZIONE SBAGLIATA (determina)
-int determina (nodo * s, int n) {
-  while (s != NULL) { // NOTA: se aggiungo anche questa condizione (&& s->next != NULL) codice comunque sbagliato se la lista è formata da un solo elemento.
-    if (s->dato == n) {
-      return n;
-    }
-    else {
-      if (s->next->dato == n) { // ERRORE QUI: se sono all'ultimo nodo e provo ad accedere al dato del nodo successivo va in crash, MANCA controllo (s->next != NULL).
-        return s->dato;
-      }
-      s = s->next;
-    }
-  }
-  return 0;
-}
-*/
 
 // Funzione cerca un valore nella lista, se lo trova restituisce il valore precedente, se il valore cercato è in testa restituisce il valore in testa.
 //    NOTA: copre i casi in cui il valore target è in testa o all'interno della lista,
@@ -99,6 +65,15 @@ int determina(nodo* s, int n) {
 
   // Non dovrebbe mai arrivarci se occorre è stato usato prima
   return 0;
+}
+
+// Dealloca la memoria della lista (funzione ricorsiva, passaggio per riferimento)
+void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
+    delete_list_ric(s->next);
+    delete s;
+    s = nullptr;  // Puntatore head diventa nullptr
+  }
 }
 
 // Stampa contenuto della lista

@@ -31,43 +31,8 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-void remove_element(nodo * & p, int d) {
-  if (p != NULL) {
-    nodo* q = p;
-    if (q->dato == d) {
-      p = p->next;
-      delete q;
-    }
-    else {
-      while(q->next != NULL) {
-        if (q->next->dato == d) {
-          nodo* r = q->next;
-          q->next = q->next->next;
-          delete r;
-          return;
-        }
-        if (q->next != NULL) {
-          q=q->next;
-        }
-      }
-    }
-  }
-}
-
-// Funzione cerca un valore nella lista, se lo trova restituisce il valore precedente.
-int determina (nodo * s, int n) {
-  while (s != NULL) {
-    if (s->dato == n) {
-      return n;
-    }
-    else {
-      if (s->next->dato == n) {
-        return s->dato;
-      }
-      s = s->next;
-    }
-  }
-  return 0;
+node * copia (nodo * s) {
+  
 }
 
 // Stampa contenuto della lista
@@ -83,11 +48,14 @@ void stampa(nodo * s) {
 int main(int argc, char * argv[]) {
   fstream myin;
 
-  nodo * x = NULL;
+  nodo * L1 = NULL;
+  nodo * L2 = NULL;
 
   int value = 0;
+
   int n = 0;
   int ris = 0;
+  bool condizione;
 
   // RICORDA: argc = numero di elementi (parole) da input.
   if (argc!=2) {
@@ -110,19 +78,8 @@ int main(int argc, char * argv[]) {
   cout << "La lista creata è:" << endl;
   stampa(x);
 
+  L2 = copia(L1)
 
-  cout << "Inserisci valore target presente nella lista: ";
-  cin >> n;
 
-  ris = determina(x, n);
-
-  if (ris == 0) {
-    cout << "Valore target non presente!"<< endl;
-  }
-  else {
-    cout << "Ecco il valore precedente al target è: " << ris << endl;
-  }
-
-  
   return 0;
 }
