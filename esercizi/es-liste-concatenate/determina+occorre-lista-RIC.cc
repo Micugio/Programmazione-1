@@ -10,60 +10,54 @@ struct nodo {
 };
 
 
-void insert_last(nodo * & s, int d) {
-  nodo * n = new nodo;
-  n->dato = d; 
-  n->next = NULL;
-
-  // Se la lista e' vuota, allora s dovra' puntare al nuovo nodo
-  if (s == NULL) {
-    s = n;
-  }
-  else {
-    // Cerco l'ultimo elemento, q->next qui e' lecito perche' siamo
-    // sicuri che s e' diverso da NULL
-    nodo * q = s;
-    while(q->next != NULL) {
-      q = q->next;
+void insert_last_ric(nodo*& s, int d) {
+    // caso base: lista vuota → inserisco qui
+    if (s == NULL) {
+        s = new nodo;
+        s->dato = d;
+        s->next = NULL;
+        return;
     }
-    // Una volta trovato ultimo elemento campo next punta al nodo nuvo.
-    q->next = n;
-  }
+
+    // caso ricorsivo: avanzo verso la coda
+    insert_last_ric(s->next, d);
 }
 
-
-//Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
-bool occorre (nodo * s, int n) {
-  while (s != NULL) {
+// Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
+bool occorre_ric(nodo * s, int n) {
+  if (s == NULL) {
+    return false;
+  }
+  else {
     if (s->dato == n) {
       return true;
     }
-    else {
-      s = s->next;
-    }
+    return occorre_ric(s->next, n);
   }
-  return false;
 }
-
 
 // Funzione cerca un valore nella lista, se lo trova restituisce il valore precedente, se il valore cercato è in testa restituisce il valore in testa.
 //    NOTA: copre i casi in cui il valore target è in testa o all'interno della lista,
 //          il main e la funzione occorre coprono i casi in cui il valore non è presente nella lista e se la lista è vuota o ha solo un elemento.
-int determina(nodo* s, int n) {
+int determina_ric(nodo* s, int n) {
+  // Caso 0: lista vuota
+  if (s == NULL) {
+    return 0;
+  }
+
   // Caso 1: valore target in testa
   if (s->dato == n) {
     return s->dato;
   }
 
   // Caso 2: valore target presente ma non in testa
-  while (s->next != NULL) {
+  if (s->next != NULL) {
     if (s->next->dato == n) {
       return s->dato;
     }
-    s = s->next;
+    return determina_ric(s->next, n);
   }
 
-  // Non dovrebbe mai arrivarci se occorre è stato usato prima
   return 0;
 }
 
@@ -112,7 +106,7 @@ int main(int argc, char * argv[]) {
 
 
   while (myin >> value) {
-    insert_last(x, value);
+    insert_last_ric(x, value);
   }
 
   cout << "La lista creata è:" << endl;
@@ -122,11 +116,11 @@ int main(int argc, char * argv[]) {
   cout << "Valore target: ";
   cin >> n;
 
-  condizione = occorre(x, n);
+  condizione = occorre_ric(x, n);
 
   if (condizione) {
     cout << "Sì, il valore è presente nella lista!" << endl;
-    ris = determina(x, n);
+    ris = determina_ric(x, n);
     cout << "Ecco il valore precedente al target è: " << ris << endl;
   }
   else {

@@ -10,29 +10,45 @@ struct nodo {
 };
 
 
-void insert_last(nodo * & s, int d) {
-  nodo * n = new nodo;
-  n->dato = d; 
-  n->next = NULL;
-
-  // Se la lista e' vuota, allora s dovra' puntare al nuovo nodo
+void insert_last_ric(nodo*& s, int d) {
+  // caso base: lista vuota → inserisco qui
   if (s == NULL) {
-    s = n;
+    s = new nodo;
+    s->dato = d;
+    s->next = NULL;
+    return;
   }
-  else {
-    // Cerco l'ultimo elemento, q->next qui e' lecito perche' siamo
-    // sicuri che s e' diverso da NULL
-    nodo * q = s;
-    while(q->next != NULL) {
-      q = q->next;
-    }
-    // Una volta trovato ultimo elemento campo next punta al nodo nuvo.
-    q->next = n;
-  }
+
+  // caso ricorsivo: avanzo verso la coda
+  insert_last_ric(s->next, d);
 }
 
-node * copia (nodo * s) {
-  
+/*
+nodo * copia (nodo * s, nodo * t = NULL) {
+  //nodo * t = s;
+  if (s == NULL) {
+    return t;
+  }
+  else {
+    t = new nodo;
+    t->dato = s->dato;
+    t->next = NULL;
+    return copia(s->next);
+    t = s;
+  }
+}
+*/
+
+nodo* copia(nodo* s) {
+  if (s == NULL) {
+    return NULL;   // caso base
+  }
+  else {
+    nodo* t = new nodo;
+    t->dato = s->dato;
+    t->next = copia(s->next);  // collegamento al ritorno
+    return t;                  // ritorna SEMPRE la testa
+  }
 }
 
 // Stampa contenuto della lista
@@ -53,10 +69,6 @@ int main(int argc, char * argv[]) {
 
   int value = 0;
 
-  int n = 0;
-  int ris = 0;
-  bool condizione;
-
   // RICORDA: argc = numero di elementi (parole) da input.
   if (argc!=2) {
     cerr << "Usa: ./a.out <fileinput>\n";
@@ -72,14 +84,15 @@ int main(int argc, char * argv[]) {
 
 
   while (myin >> value) {
-    insert_last(x, value);
+    insert_last_ric(L1, value);
   }
 
-  cout << "La lista creata è:" << endl;
-  stampa(x);
+  cout << "Lista L1:" << endl;
+  stampa(L1);
 
-  L2 = copia(L1)
-
+  L2 = copia(L1);
+  cout << "Lista L2:" << endl;
+  stampa(L2);
 
   return 0;
 }

@@ -31,6 +31,18 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
+nodo* copia(nodo* s) {
+  if (s == NULL) {
+    return NULL;   // caso base
+  }
+  else {
+    nodo* t = new nodo;
+    t->dato = s->dato;
+    t->next = copia(s->next);  // collegamento al ritorno
+    return t;                  // ritorna SEMPRE la testa
+  }
+}
+
 // Stampa contenuto della lista
 void stampa(nodo * s) {
   int i = 1;
@@ -40,37 +52,29 @@ void stampa(nodo * s) {
   }
 }
 
-// Stampa contenuto della lista invertito con funzione ricorsiva
-void stampa_inverso(nodo * s, int j) {
-  if (s == NULL) {
-    return;
-  }
-  else {
-    stampa_inverso(s->next, ++j);
-    cout << "Elemento " << j << " = " << s->dato << endl;
-  }
-}
-
 
 int main() {
 
-  nodo * x = NULL;
+  nodo * L1 = NULL;
+  nodo * L2 = NULL;
 
   int value = 0;
-  int j = 0;
 
   srand(time(NULL));
 
   for (int i = 1; i < 6; i++) {
     value = rand() % 20;
-    insert_last(x, value);
+    insert_last(L1, value);
   }
 
-  cout << "La lista creata è:" << endl;
-  stampa(x);
+  cout << "Lista L1:" << endl;
+  stampa(L1);
 
-  cout << "La lista invertita è:" << endl;
-  stampa_inverso(x, j);
+  L2 = copia(L1);
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
+
 
   return 0;
 }

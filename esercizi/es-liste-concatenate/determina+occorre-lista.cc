@@ -49,7 +49,7 @@ bool occorre (nodo * s, int n) {
 }
 */
 
-//Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
+// Funzione cerca se un valore è presente nella lista, in caso affermativo restituisce true altrimenti false.
 bool occorre (nodo * s, int n) {
   while (s != NULL) {
     if (s->dato == n) {
