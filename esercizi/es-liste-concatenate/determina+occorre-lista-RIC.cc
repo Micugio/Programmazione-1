@@ -127,6 +127,7 @@ int main(int argc, char * argv[]) {
     cout << "No, il valore non è presente nella lista!" << endl;
   }
 
+  delete_list_ric(x);
 
   return 0;
 }

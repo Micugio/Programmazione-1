@@ -31,16 +31,38 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-nodo* copia(nodo* s) {
-  if (s == NULL) {
-    return NULL;   // caso base
+void remove_element(nodo * & p, int d) {
+  if (p != NULL) {
+    nodo* q = p;
+    if (q->dato == d) {
+      p = p->next;
+      delete q;
+    }
+    else {
+      while(q->next != NULL) {
+        if (q->next->dato == d) {
+          nodo* r = q->next;
+          q->next = q->next->next;
+          delete r;
+          return;
+        }
+        if (q->next != NULL) {
+          q=q->next;
+        }
+      }
+    }
   }
-  else {
-    nodo* t = new nodo;
-    t->dato = s->dato;
-    t->next = copia(s->next);  // collegamento al ritorno
-    return t;                  // ritorna SEMPRE la testa
+}
+
+int massimo (nodo * s) {
+  int max = 0;
+  while (s != NULL) {
+    if (max < s->dato) {
+      max = s->dato;
+    }
+    s = s->next;
   }
+  return max;
 }
 
 // Stampa contenuto della lista
@@ -55,26 +77,32 @@ void stampa(nodo * s) {
 
 int main() {
 
-  nodo * L1 = NULL;
-  nodo * L2 = NULL;
+  nodo * x = NULL;
 
   int value = 0;
+  int max = 0;
 
   srand(time(NULL));
 
+  /*
   for (int i = 1; i < 6; i++) {
     value = rand() % 20;
-    insert_last(L1, value);
+    insert_last(x, value);
   }
-
-  cout << "Lista L1:" << endl;
-  stampa(L1);
-
-  L2 = copia(L1);
-  cout << "Lista L2:" << endl;
-  stampa(L2);
+  */
+  cout << "Lista x:" << endl;
+  stampa(x);
 
 
+  max = massimo(x);
+  cout << "Massimo: " << max << endl;
+  cout << endl;
+
+  remove_element(x, max);
+  insert_last(x, max);
+  
+  cout << "Lista x aggiornata:" << endl;
+  stampa(x);
 
   return 0;
 }

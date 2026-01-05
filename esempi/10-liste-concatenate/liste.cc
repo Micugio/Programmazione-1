@@ -79,13 +79,22 @@ s = nullptr;  // Puntatore head diventa nullptr
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Stampa contenuto della lista
+// VERSIONE ITERATIVA: Stampa contenuto della lista
 void stampa(nodo * s) {
   int i = 0;
   while(s != NULL) {
     cout << "Elemento " << i++ << " = " << s->dato << endl;
     s = s->next;
   }
+}
+
+// VERSIONE RICORSIVA: Stampa contenuto della lista
+void stampa_ric(nodo * s, int i = 0) {
+    if (s == NULL) {
+      return; // caso base: lista finita
+    }
+    cout << "Elemento " << i << " = " << s->dato << endl;
+    stampa_ric(s->next, i + 1); // passo al nodo successivo incrementando l'indice
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,8 +110,7 @@ void insert_last(nodo * & s, int d) {
     s = n;
   }
   else {
-    // Cerco l'ultimo elemento, q->next qui e' lecito perche' siamo
-    // sicuri che s e' diverso da NULL
+    // Cerco l'ultimo elemento, q->next qui e' lecito perche' siamo sicuri che s e' diverso da NULL
     nodo * q = s;
     while(q->next != NULL) {
       q = q->next;
@@ -385,12 +393,17 @@ nodo  * concat_se_ricorsiva(nodo  * s1, nodo  * s2) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// VERSIONE RICORSIVA: Duplica una lista
 nodo  * copy_seq(nodo  * s) {
-  if (s == NULL) return NULL;
-  nodo * t = new nodo;
-  t->dato = s->dato;
-  t->next = copy_seq(s->next);
-  return t;
+  if (s == NULL) {
+    return NULL;   // caso base: lista vuota
+  }
+  else {
+    nodo* t = new nodo;
+    t->dato = s->dato;
+    t->next = copia(s->next);  // collegamento al ritorno
+    return t;                  // ritorna SEMPRE la testa
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

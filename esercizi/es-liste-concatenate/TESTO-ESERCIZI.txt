@@ -10,7 +10,7 @@ ESERCIZI PROPOSTI:
 
 * Scrivere una funzione che costruisca una copia di una data lista
   (cioè, una nuova lista che contiene le stesse informazioni nello
-  stesso ordine).
+  stesso ordine). 
 
 * Scrivere una funzione che sposti l’elemento più grande di una
   lista concatenata nell'ultimo nodo della lista.

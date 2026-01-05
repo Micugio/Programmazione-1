@@ -1,5 +1,5 @@
 #include <iostream>
-#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 
@@ -10,45 +10,59 @@ struct nodo {
 };
 
 
-void insert_last_ric(nodo*& s, int d) {
-  // caso base: lista vuota → inserisco qui
-  if (s == NULL) {
-    s = new nodo;
-    s->dato = d;
-    s->next = NULL;
-    return;
-  }
+void insert_last(nodo * & s, int d) {
+  nodo * n = new nodo;
+  n->dato = d; 
+  n->next = NULL;
 
-  // caso ricorsivo: avanzo verso la coda
-  insert_last_ric(s->next, d);
-}
-
-/*
-nodo * copia (nodo * s, nodo * t = NULL) {
-  //nodo * t = s;
+  // Se la lista e' vuota, allora s dovra' puntare al nuovo nodo
   if (s == NULL) {
-    return t;
+    s = n;
   }
   else {
-    t = new nodo;
-    t->dato = s->dato;
-    t->next = NULL;
-    return copia(s->next);
-    t = s;
+    // Cerco l'ultimo elemento, q->next qui e' lecito perche' siamo
+    // sicuri che s e' diverso da NULL
+    nodo * q = s;
+    while(q->next != NULL) {
+      q = q->next;
+    }
+    // Una volta trovato ultimo elemento campo next punta al nodo nuvo.
+    q->next = n;
   }
 }
-*/
 
 nodo* copia(nodo* s) {
-  if (s == NULL) {
-    return NULL;   // caso base
+  if (s == NULL) {       // lista originale vuota
+    return NULL;
   }
-  else {
-    nodo* t = new nodo;
-    t->dato = s->dato;
-    t->next = copia(s->next);  // collegamento al ritorno
-    return t;                  // ritorna SEMPRE la testa
+
+  nodo* testaNuova = NULL;  // testa della nuova lista
+  nodo* ultimo = NULL;      // puntatore all'ultimo nodo della nuova lista
+  nodo* corrente = s;          // puntatore per scorrere la lista originale
+
+  while (corrente != NULL) {
+    // Creo un nuovo nodo
+    nodo* nuovo = new nodo;
+    nuovo->dato = corrente->dato;
+    nuovo->next = NULL;
+
+    if (testaNuova == NULL) {
+      // primo nodo: inizializzo la testa della nuova lista
+      testaNuova = nuovo;
+    } 
+    else {
+      // collego il nuovo nodo all'ultimo nodo della nuova lista
+       ultimo->next = nuovo;
+      }
+
+    // aggiorno l'ultimo nodo
+    ultimo = nuovo;
+
+    // passo al prossimo nodo della lista originale
+    corrente = corrente->next;
   }
+
+  return testaNuova;  // restituisco la testa della nuova lista
 }
 
 // Stampa contenuto della lista
@@ -61,30 +75,18 @@ void stampa(nodo * s) {
 }
 
 
-int main(int argc, char * argv[]) {
-  fstream myin;
+int main() {
 
   nodo * L1 = NULL;
   nodo * L2 = NULL;
 
   int value = 0;
 
-  // RICORDA: argc = numero di elementi (parole) da input.
-  if (argc!=2) {
-    cerr << "Usa: ./a.out <fileinput>\n";
-    exit(0);
-  }
+  srand(time(NULL));
 
-  myin.open(argv[1],ios::in);
-
-  if (myin.fail()) {
-    cerr << "Il file " << argv[1] << " non esiste\n";
-    exit(0); // NOTA: Non serve chiudere lo stream myin, non è mai stato aperto perché è andato in errore
-  }
-
-
-  while (myin >> value) {
-    insert_last_ric(L1, value);
+  for (int i = 1; i < 6; i++) {
+    value = rand() % 20;
+    insert_last(L1, value);
   }
 
   cout << "Lista L1:" << endl;
@@ -93,6 +95,8 @@ int main(int argc, char * argv[]) {
   L2 = copia(L1);
   cout << "Lista L2:" << endl;
   stampa(L2);
+
+
 
   return 0;
 }
