@@ -23,22 +23,6 @@ void insert_last_ric(nodo*& s, int d) {
   insert_last_ric(s->next, d);
 }
 
-/*
-nodo * copia (nodo * s, nodo * t = NULL) {
-  //nodo * t = s;
-  if (s == NULL) {
-    return t;
-  }
-  else {
-    t = new nodo;
-    t->dato = s->dato;
-    t->next = NULL;
-    return copia(s->next);
-    t = s;
-  }
-}
-*/
-
 nodo* copia(nodo * s) {
   if (s == NULL) {
     return NULL;   // caso base: lista vuota
@@ -57,6 +41,14 @@ void stampa_ric(nodo * s, int i = 0) {
     }
     cout << "Elemento " << i << " = " << s->dato << endl;
     stampa_ric(s->next, i + 1); // passo al nodo successivo incrementando l'indice
+}
+
+void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
+    delete_list_ric(s->next);
+    delete s;
+    s = nullptr;  // Puntatore head diventa nullptr
+  }
 }
 
 
@@ -81,7 +73,8 @@ int main() {
   cout << "Lista L2:" << endl;
   stampa_ric(L2);
 
-
+  delete_list_ric(L1);
+  delete_list_ric(L2);
 
   return 0;
 }

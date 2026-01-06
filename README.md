@@ -143,6 +143,24 @@ Assegnazione: =, +=, -=, *= ecc.
 1. parametri formali = parametri della definizione
 2. parametri attuali = parametri della chiamata
 
+## FUNZIONI RICORSIVE
+├── VOID (produce effetti)
+|     |
+|     ├── tail recursive (chiamata ricorsiva = ultima istruzione)
+|     |
+|     └── NON tail recursive (c'è codice dopo la chiamata ricorsiva)
+│
+|
+└── RETURN (produce un valore)
+      |
+      ├── calcolo al RITORNO
+      |                 |
+      │                 └── NON tail recursive (c'è codice dopo la chiamata ricorsiva)
+      |
+      └── calcolo all’ANDATA (con accomulatore)
+                        |
+                        └── tail recursive (chiamata ricorsiva = ultima istruzione)
+
 ## Array e Funzioni
 Gli array vengono passati per riferimento alla funzione (cioè sono dei puntatori), allora è meglio mettere davanti "const" a "int myArray [dim]" (dim è un numero costante); int funzione (const int myArray [dim]);
 Quando passi un array a una funzione, diventa un puntatore, la dimensione si perde.

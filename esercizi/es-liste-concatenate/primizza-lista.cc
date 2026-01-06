@@ -89,6 +89,18 @@ void stampa(nodo * s) {
   }
 }
 
+void delete_list(nodo * & s) {   // Passaggio per riferimento
+  // Alla fine la lista e' vuota.
+  while(s != NULL) {
+    // Salvo il valore del nodo corrente
+    nodo * t = s;
+    // Avanzo al nodo sucessivo
+    s = s->next;
+    // Dealloco il nodo salvato
+    delete t;
+  }
+}
+
 
 int main(int argc, char * argv[]) {
   fstream myin;
@@ -119,10 +131,13 @@ int main(int argc, char * argv[]) {
   cout << "La lista creata è:" << endl;
   stampa(x);
 
+  cout << endl;
   
   primizzaLista(x);
   cout << "La lista con SOLO numeri primi è:" << endl;
   stampa(x);
+
+  delete_list(x);
 
   return 0;
 }

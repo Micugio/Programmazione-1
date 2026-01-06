@@ -61,21 +61,20 @@ int determina_ric(nodo* s, int n) {
   return 0;
 }
 
-// Dealloca la memoria della lista (funzione ricorsiva, passaggio per riferimento)
-void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
-  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
-    delete_list_ric(s->next);
-    delete s;
-    s = nullptr;  // Puntatore head diventa nullptr
-  }
-}
-
 // Stampa contenuto della lista
 void stampa(nodo * s) {
   int i = 1;
   while(s != NULL) {
     cout << "Elemento " << i++ << " = " << s->dato << endl;
     s = s->next;
+  }
+}
+
+void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
+    delete_list_ric(s->next);
+    delete s;
+    s = nullptr;  // Puntatore head diventa nullptr
   }
 }
 

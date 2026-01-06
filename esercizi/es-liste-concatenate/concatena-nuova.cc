@@ -31,49 +31,19 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-void insert_first(nodo * & s, int d) {
-  // Creo il nuovo nodo e memorizzo il valore utilizzando costruttore
-  // ad un solo argomento
-  nodo * n = new nodo;
-  n->dato = d;
-  // Il campo next di n punta a s
-  n->next = s;
-  // s punt a nuovo nodo n
-  s = n;
-}
+nodo  * concatena(nodo  * s1, nodo  * s2) {
+  if (s1 == NULL) return s2;
+  if (s2 == NULL) return s1;
 
-void remove_element(nodo * & p, int d) {
-  if (p != NULL) {
-    nodo* q = p;
-    if (q->dato == d) {
-      p = p->next;
-      delete q;
-    }
-    else {
-      while(q->next != NULL) {
-        if (q->next->dato == d) {
-          nodo* r = q->next;
-          q->next = q->next->next;
-          delete r;
-          return;
-        }
-        if (q->next != NULL) {
-          q=q->next;
-        }
-      }
-    }
-  }
-}
+  nodo  * p = s1;
 
-int minimo (nodo * s) {
-  int min = s->dato;
-  while (s != NULL) {
-    if (min > s->dato) {
-      min = s->dato;
-    }
-    s = s->next;
+  while((p != NULL) && (p->next != NULL)) {
+    p = p->next;
   }
-  return min;
+
+  p->next = s2;
+
+  return s1;
 }
 
 // Stampa contenuto della lista
@@ -100,32 +70,39 @@ void delete_list(nodo * & s) {   // Passaggio per riferimento
 
 int main() {
 
-  nodo * x = NULL;
+  nodo * L1 = NULL;
+  nodo * L2 = NULL;
 
   int value = 0;
-  int min = 0;
 
   srand(time(NULL));
-  
+
   for (int i = 1; i < 6; i++) {
     value = rand() % 20;
-    insert_last(x, value);
+    insert_last(L1, value);
   }
-  cout << "Lista x:" << endl;
-  stampa(x);
 
+  for (int i = 1; i < 6; i++) {
+    value = rand() % 20;
+    insert_last(L2, value);
+  }
 
-  min = minimo(x);
-  cout << "Minimo: " << min << endl;
+  cout << "Lista L1:" << endl;
+  stampa(L1);
+
+  cout << endl;
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
   cout << endl;
 
-  remove_element(x, min);
-  insert_first(x, min);
-  
-  cout << "Lista x aggiornata:" << endl;
-  stampa(x);
+  L1 = concatena(L1, L2);
+  cout << "Lista L1 (= L1 + L2):" << endl;
+  stampa(L1);
 
-  delete_list(x);
+  cout << endl;
+
+  delete_list(L1);
 
   return 0;
 }

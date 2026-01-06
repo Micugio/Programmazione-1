@@ -29,6 +29,7 @@ void stampa_decrescente (int n) {
 }
 */
 
+// FUNZIONE RICORSIVA void NON tail recursive
 void stampa_crescente (int n) {
     if (n >= 0) {
         stampa_crescente(n-1);
@@ -36,6 +37,7 @@ void stampa_crescente (int n) {
     }
 }
 
+// FUNZIONE RICORSIVA void tail recursive
 void stampa_decrescente (int n) {
     if (n >= 0) {
         cout << n << " ";

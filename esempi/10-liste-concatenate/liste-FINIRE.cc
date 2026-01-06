@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 // Struttura lista di interi
@@ -13,8 +14,9 @@ struct nodo {
 int length(nodo * s) {  // NOTA: SEMPRE passaggio per valore, per riferimento perdo accesso a lista (perchè nodo iniziale s (head) alla fine della funzione punterà a null, cioè avrò una lista vuota senza nodi)
   int result = 0;
 
-  for( ; s != NULL; s = s->next)
+  for( ; s != NULL; s = s->next) {
     result++;
+  }
   return result;
 }
 
@@ -28,8 +30,8 @@ int length_ric(nodo * s) { // NOTA: passaggio per valore perchè voglio solo con
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// VERSIONE ITERATIVA 1: Dealloca la memoria della lista (NOTA: uso passaggio per riferimento).
-void delete_list(nodo * & s) {   // Passaggio per riferimento
+// VERSIONE ITERATIVA: Dealloca la memoria della lista.
+void delete_list(nodo * & s) {
   // Alla fine la lista e' vuota.
   while(s != NULL) {
     // Salvo il valore del nodo corrente
@@ -40,42 +42,15 @@ void delete_list(nodo * & s) {   // Passaggio per riferimento
     delete t;
   }
 }
-/*
-// VERSIONE ITERATIVA 2: Dealloca la memoria della lista (NOTA: uso passaggio per valore).
-void delete_list(nodo * s) {    //(passaggio per valore)
-  // Alla fine la lista e' vuota.
-  while(s != NULL) {
-    // Salvo il valore del nodo corrente
-    nodo * t = s;
-    // Avanzo al nodo sucessivo
-    s = s->next;
-    // Dealloco il nodo salvato
-    delete t;
-  }
-}
-DOPO funzione DEVO AGGIUNGERE nel main:
-s = nullptr;   // Puntatore head diventa nullptr
-*/
 
-// VERSIONE RICORSIVA 1: Dealloca la memoria della lista (NOTA: uso passaggio per riferimento).
-void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+// VERSIONE RICORSIVA: Dealloca la memoria della lista.
+void delete_list_ric(nodo * & s) {
   if (s != nullptr) {  // Tutti i casi tranne quando è caso base
     delete_list_ric(s->next);
     delete s;
     s = nullptr;  // Puntatore head diventa nullptr
   }
 }
-/*
-// VERSIONE RICORSIVA 2: Dealloca la memoria della lista (NOTA: uso passaggio per valore).
-void delete_list_ric(nodo * s) {
-  if (s != nullptr) {
-    delete_list_ric(s->next);
-    delete s;
-  }
-}
-DOPO funzione DEVO AGGIUNGERE nel main:
-s = nullptr;  // Puntatore head diventa nullptr
-*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -223,13 +198,16 @@ void remove_element(nodo * & p, int d) {
 
 // VERSIONE RICORSIVA: Rimuove il nodo che contiene il valore cercato (d).
 void remove_element_ric(nodo* &p, int d) {
-  if (p == NULL) return;        // lista vuota, niente da fare
+  if (p == NULL) {
+    return;        // lista vuota, niente da fare
+  }
 
   if (p->dato == d) {           // il nodo corrente è quello da eliminare
     nodo* temp = p;
     p = p->next;              // aggiorno il puntatore alla lista
     delete temp;              // libero la memoria
-  } else {
+  } 
+  else {
     remove_element_ric(p->next, d); // ricorsione sul prossimo nodo
   }
 }
@@ -261,12 +239,10 @@ nodo* reverse_aux(nodo* x, nodo* r) {
   x->next = r;              // inserisco x in testa all'accumulatore
   return reverse_aux(t, x); // ricorsione sul resto della lista
 }
-
 // Funzione principale
 nodo* reverse_ric(nodo* x) {
   return reverse_aux(x, NULL);
 }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -294,7 +270,6 @@ nodo* reverse_copia_aux(nodo* x, nodo* r) {
   t->next = r;             // inserisco in testa all'accumulatore
   return reverse_copia_aux(x->next, t); // ricorsione sul resto
 }
-
 // Funzione principale
 nodo* reverse_copia_ric(nodo* x) {
   return reverse_copia_aux(x, NULL);
@@ -329,79 +304,117 @@ nodo* get_n_ric(nodo* s, int n) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// VERSIONE ITERATIVA: Ritornare il nodo che precede un nodo x.
+// VERSIONE ITERATIVA: Ritornare il nodo che precede un nodo x, restituisce NULL se: lista vuota, x è il primo nodo, x non è nella lista.
 nodo * prec(nodo * s, nodo * x) {
-  // primo ed unico elemento uguale a x
-  if (s == x) return x;
-  // primo e unico elemento e' differente da x
-  if ((s == NULL) && (s->next == NULL)) return NULL;
+  if (s == NULL) {
+    return NULL;
+  }
+  if (s == x) { // x è il primo nodo, restituisco NULL
+    return NULL;
+  }
 
-  nodo * t = s; // nodo precedente al nodo corrente che sto cercando,
-		// inizializzato al primo elemento della lista
-  nodo * l = s->next; // nodo che uso per scorrere la lista,
-		      // inizializzato al secondo elemento della
-		      // lista.
+  nodo * t = s; // nodo precedente al nodo corrente che sto cercando, inizializzato al primo elemento della lista.
+  nodo * l = s->next; // nodo che uso per scorrere la lista, inizializzato al secondo elemento della lista.
 
   while((l != NULL) && (l != x)) {
-    // Modifico l e t per rispettare il loro significato, ovvero che t
-    // punta l nodo che precede l
+    // Modifico l e t per rispettare il loro significato, ovvero che t punta l nodo che precede l
     t = l;
     l = l->next;
   }
   // raggiunto ultimo elemento e non c'e' nulla
-  if (l == NULL) return NULL;
+  if (l == NULL) {
+    return NULL;
+  }
   return t;
 }
 
-// VERSIONE RICORSIVA: Ritornare il nodo che precede un nodo x.
+// VERSIONE RICORSIVA: Ritornare il nodo che precede un nodo x, restituisce NULL se: lista vuota, x è il primo nodo, x non è nella lista.
 nodo* prec_ric(nodo* s, nodo* x) {
-    if (s == NULL || s->next == NULL) {
-        // Lista vuota o ultimo elemento senza successivo
-        return NULL;
-    }
-    if (s->next == x) {
-        // Il prossimo nodo è x, quindi s è il precedente
-        return s;
-    }
-    // Ricorsione sul nodo successivo
-    return prec_ric(s->next, x);
+  if (s == NULL || s->next == NULL) {
+    // Lista vuota o ultimo elemento senza successivo
+    return NULL;
+  }
+  if (s->next == x) {
+    // Il prossimo nodo è x, quindi s è il precedente
+    return s;
+  }
+  // Ricorsione sul nodo successivo
+  return prec_ric(s->next, x);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// VERSIONE ITERATIVA: Concatena due liste.
-nodo  * concat_se_iterativa(nodo  * s1, nodo  * s2) {
+// VERSIONE ITERATIVA: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1).
+nodo  * concatena(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
   if (s2 == NULL) return s1;
 
   nodo  * p = s1;
 
-  while((p != NULL) && (p->next != NULL))
+  while((p != NULL) && (p->next != NULL)) {
     p = p->next;
+  }
 
   p->next = s2;
 
   return s1;
 }
 
-// VERSIONE RICORSIVA: Concatena due liste.
-nodo  * concat_se_ricorsiva(nodo  * s1, nodo  * s2) {
-  if (s1 == NULL) return s2;
-  s1->next = concat_se_ricorsiva(s1->next, s2);
+// VERSIONE RICORSIVA: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1).
+nodo  * concatena_ric(nodo  * s1, nodo  * s2) {
+  if (s1 == NULL) {
+    return s2;
+  }
+  s1->next = concatena_ric(s1->next, s2);
   return s1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// VERSIONE RICORSIVA: Duplica una lista
-nodo  * copy_seq(nodo  * s) {
+// VERSIONE ITERATIVA: Duplica una lista (ritorna il nodo in testa della nuova lista)
+nodo* copia(nodo* s) {
+  if (s == NULL) {       // lista originale vuota
+    return NULL;
+  }
+
+  nodo* testaNuova = NULL;  // testa della nuova lista
+  nodo* ultimo = NULL;      // puntatore all'ultimo nodo della nuova lista
+  nodo* corrente = s;          // puntatore per scorrere la lista originale
+
+  while (corrente != NULL) {
+    // Creo un nuovo nodo
+    nodo* nuovo = new nodo;
+    nuovo->dato = corrente->dato;
+    nuovo->next = NULL;
+
+    if (testaNuova == NULL) {
+      // primo nodo: inizializzo la testa della nuova lista
+      testaNuova = nuovo;
+    } 
+    else {
+      // collego il nuovo nodo all'ultimo nodo della nuova lista
+       ultimo->next = nuovo;
+      }
+
+    // aggiorno l'ultimo nodo
+    ultimo = nuovo;
+
+    // passo al prossimo nodo della lista originale
+    corrente = corrente->next;
+  }
+
+  return testaNuova;  // restituisco la testa della nuova lista
+}
+
+// VERSIONE RICORSIVA: Duplica una lista (ritorna il nodo in testa della nuova lista).
+nodo  * copia_ric(nodo  * s) {
   if (s == NULL) {
     return NULL;   // caso base: lista vuota
   }
   else {
     nodo* t = new nodo;
     t->dato = s->dato;
-    t->next = copia(s->next);  // collegamento al ritorno
+    t->next = copia_ric(s->next);  // collegamento al ritorno
     return t;                  // ritorna SEMPRE la testa
   }
 }
@@ -410,15 +423,18 @@ nodo  * copy_seq(nodo  * s) {
 
 // VERSIONE ITERATIVA:
 nodo  * concat_nose(nodo  * s1, nodo  * s2) {
-  if (s1 == NULL) return copy_seq(s2);
-  if (s2 == NULL) return copy_seq(s1);
-
-  nodo  *cs1 = copy_seq(s1);
-  nodo  *cs2 = copy_seq(s2);
+  if (s1 == NULL) {
+    return copia(s2);
+  }
+  if (s2 == NULL) {
+    return copia(s1);
+  }
+  nodo  *cs1 = copia(s1);
+  nodo  *cs2 = copia(s2);
 
   nodo  * p;
 
-  for(p = cs1; ((p != NULL) && (p->next != NULL)); p = p->next);
+  for (p = cs1; ((p != NULL) && (p->next != NULL)); p = p->next);
 
   p->next = cs2;
 
@@ -427,7 +443,9 @@ nodo  * concat_nose(nodo  * s1, nodo  * s2) {
 
 // VERSIONE RICORSIVA:
 nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
-  if (s1 == NULL) return copy_seq(s2);
+  if (s1 == NULL) {
+    return copia(s2);
+  }
 
   nodo * t = new nodo;
   t->dato = s1->dato;
@@ -437,6 +455,102 @@ nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int main() {
+  nodo * x = NULL;
+  nodo * y = NULL;
+  nodo * t = NULL;
+  nodo * s = NULL;
+
+  nodo * L1 = NULL;
+  nodo * L2 = NULL;
+
+  int value = 0;
+
+  srand(time(NULL));
+
+  for (int i = 1; i < 6; i++) {
+    value = rand() % 20;
+    insert_last(L1, value);
+  }
+  cout << "Lista L1:" << endl;
+  stampa(L1);
+
+  cout << endl;
+
+  for (int i = 1; i < 6; i++) {
+    value = rand() % 20;
+    insert_last(L2, value);
+  }
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
+  cout << "////////////////////////////////////////////////" << endl;
+  
+  ////////////////////////////////////////////////////////////////////////////
+  
+  // Provare ad inserire qui le funzioni definite prima
+  cout << "La lista L1 ha lunghezza: " << length(L1) << endl;
+  cout << "La lista L2 ha lunghezza: " << length_ric(L2) << endl;
+
+  insert_first(L1, 9);
+  insert_last(L1, 29);
+  insert_order(L1, 100);
+  remove_first(L1);
+  remove_element(L1, 29);
+  t = get_n(L1, 3);
+  cout << "Valore elemento 3 di L1 = " << t->dato << endl;
+  s = prec(L1, L1->next);
+  cout << "Valore precedente al elemento 1 di L1 = " << s->dato << endl;
+  
+
+  insert_last_ric(L2, 22);
+  insert_order_ric(L2, 0);
+  remove_element_ric(L2, 22);
+  L2 = reverse(L2);
+  L2 = reverse_ric(L2);
+  t = get_n_ric(L2, 3);
+  cout << "Valore elemento 3 di L1 = " << t->dato << endl;
+  s = prec_ric(L1, L1->next);
+  cout << "Valore precedente al elemento 1 di L2 = " << s->dato << endl;
+
+
+  x = reverse_copia(L1);
+  y = reverse_copia_ric(L2);
+
+
+  cout << endl;
+  cout << "Lista L1:" << endl;
+  stampa(L1);
+
+  cout << endl;
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
+  cout << endl;
+  cout << "Lista x:" << endl;
+  stampa(x);
+
+  cout << endl;
+  cout << "Lista y:" << endl;
+  stampa(y);
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  // Per eliminare memoria dinamica ed evitare memory leak:
+  delete_list(L1);
+  delete_list(L2);
+  delete_list(x);
+  delete_list(y);
+  delete_list(t);
+  delete_list(s);
+  
+  return 0;
+}
+
+
+
+
 /*
 int main() {
   nodo * L1 = NULL;
@@ -483,15 +597,3 @@ int main() {
   delete_list(L1);
 }
 */
-
-int main () {
-  nodo * x = NULL;
-
-  for (int i = 0; i<5; i++) {
-    insert_last_ric(x, i);
-  }
-
-  stampa(x);
-
-  return 0;
-}

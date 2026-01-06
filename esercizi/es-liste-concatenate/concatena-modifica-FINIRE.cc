@@ -31,49 +31,38 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-void insert_first(nodo * & s, int d) {
-  // Creo il nuovo nodo e memorizzo il valore utilizzando costruttore
-  // ad un solo argomento
-  nodo * n = new nodo;
-  n->dato = d;
-  // Il campo next di n punta a s
-  n->next = s;
-  // s punt a nuovo nodo n
-  s = n;
-}
+nodo* copia(nodo* s) {
+  if (s == NULL) {       // lista originale vuota
+    return NULL;
+  }
 
-void remove_element(nodo * & p, int d) {
-  if (p != NULL) {
-    nodo* q = p;
-    if (q->dato == d) {
-      p = p->next;
-      delete q;
-    }
+  nodo* testaNuova = NULL;  // testa della nuova lista
+  nodo* ultimo = NULL;      // puntatore all'ultimo nodo della nuova lista
+  nodo* corrente = s;          // puntatore per scorrere la lista originale
+
+  while (corrente != NULL) {
+    // Creo un nuovo nodo
+    nodo* nuovo = new nodo;
+    nuovo->dato = corrente->dato;
+    nuovo->next = NULL;
+
+    if (testaNuova == NULL) {
+      // primo nodo: inizializzo la testa della nuova lista
+      testaNuova = nuovo;
+    } 
     else {
-      while(q->next != NULL) {
-        if (q->next->dato == d) {
-          nodo* r = q->next;
-          q->next = q->next->next;
-          delete r;
-          return;
-        }
-        if (q->next != NULL) {
-          q=q->next;
-        }
+      // collego il nuovo nodo all'ultimo nodo della nuova lista
+       ultimo->next = nuovo;
       }
-    }
-  }
-}
 
-int minimo (nodo * s) {
-  int min = s->dato;
-  while (s != NULL) {
-    if (min > s->dato) {
-      min = s->dato;
-    }
-    s = s->next;
+    // aggiorno l'ultimo nodo
+    ultimo = nuovo;
+
+    // passo al prossimo nodo della lista originale
+    corrente = corrente->next;
   }
-  return min;
+
+  return testaNuova;  // restituisco la testa della nuova lista
 }
 
 // Stampa contenuto della lista
@@ -100,32 +89,26 @@ void delete_list(nodo * & s) {   // Passaggio per riferimento
 
 int main() {
 
-  nodo * x = NULL;
+  nodo * L1 = NULL;
+  nodo * L2 = NULL;
 
   int value = 0;
-  int min = 0;
 
   srand(time(NULL));
-  
+
   for (int i = 1; i < 6; i++) {
     value = rand() % 20;
-    insert_last(x, value);
+    insert_last(L1, value);
   }
-  cout << "Lista x:" << endl;
-  stampa(x);
+
+  cout << "Lista L1:" << endl;
+  stampa(L1);
+
+  L2 = copia(L1);
+  cout << "Lista L2:" << endl;
+  stampa(L2);
 
 
-  min = minimo(x);
-  cout << "Minimo: " << min << endl;
-  cout << endl;
-
-  remove_element(x, min);
-  insert_first(x, min);
-  
-  cout << "Lista x aggiornata:" << endl;
-  stampa(x);
-
-  delete_list(x);
 
   return 0;
 }

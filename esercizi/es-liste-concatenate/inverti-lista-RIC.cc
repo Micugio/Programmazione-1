@@ -51,6 +51,14 @@ void stampa_inverso(nodo * s, int j) {
   }
 }
 
+void delete_list_ric(nodo * & s) {   //(passaggio per riferimento)
+  if (s != nullptr) {  // Tutti i casi tranne quando è caso base
+    delete_list_ric(s->next);
+    delete s;
+    s = nullptr;  // Puntatore head diventa nullptr
+  }
+}
+
 
 int main() {
 
@@ -71,6 +79,8 @@ int main() {
 
   cout << "La lista invertita è:" << endl;
   stampa_inverso(x, j);
+
+  delete_list_ric(x);
 
   return 0;
 }
