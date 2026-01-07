@@ -31,6 +31,41 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
+nodo* copia(nodo* s) {
+  if (s == NULL) {       // lista originale vuota
+    return NULL;
+  }
+
+  nodo* testaNuova = NULL;  // testa della nuova lista
+  nodo* ultimo = NULL;      // puntatore all'ultimo nodo della nuova lista
+  nodo* corrente = s;          // puntatore per scorrere la lista originale
+
+  while (corrente != NULL) {
+    // Creo un nuovo nodo
+    nodo* nuovo = new nodo;
+    nuovo->dato = corrente->dato;
+    nuovo->next = NULL;
+
+    if (testaNuova == NULL) {
+      // primo nodo: inizializzo la testa della nuova lista
+      testaNuova = nuovo;
+    } 
+    else {
+      // collego il nuovo nodo all'ultimo nodo della nuova lista
+       ultimo->next = nuovo;
+      }
+
+    // aggiorno l'ultimo nodo
+    ultimo = nuovo;
+
+    // passo al prossimo nodo della lista originale
+    corrente = corrente->next;
+  }
+
+  return testaNuova;  // restituisco la testa della nuova lista
+}
+
+/*
 nodo  * concatena(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) return s2;
   if (s2 == NULL) return s1;
@@ -44,6 +79,27 @@ nodo  * concatena(nodo  * s1, nodo  * s2) {
   p->next = s2;
 
   return s1;
+}
+*/
+
+nodo  * concatena_new(nodo  * s1, nodo  * s2) {
+  if (s1 == NULL) {
+    return copia(s2);
+  }
+  if (s2 == NULL) {
+    return copia(s1);
+  }
+  nodo  *cs1 = copia(s1);
+  nodo  *cs2 = copia(s2);
+
+  nodo  * p;
+
+  // for (p = cs1; ((p != NULL) && (p->next != NULL)); p = p->next);  NOTA: non serve controllare (p != NULL) già controllato prima con if che s1 (e quindi cs1) != da NULL.
+  for (p = cs1; p->next != NULL; p = p->next);
+
+  p->next = cs2;
+
+  return cs1;
 }
 
 // Stampa contenuto della lista
@@ -72,6 +128,10 @@ int main() {
 
   nodo * L1 = NULL;
   nodo * L2 = NULL;
+  nodo * k = NULL;
+
+  // nodo * x = NULL;
+  // nodo * y = NULL;
 
   int value = 0;
 
@@ -96,13 +156,45 @@ int main() {
 
   cout << endl;
 
-  L1 = concatena(L1, L2);
-  cout << "Lista L1 (= L1 + L2):" << endl;
+/*
+  x = copia(L1);
+  y = copia(L2);
+
+  x = concatena(x, y);
+
+  cout << "Lista L1:" << endl;
   stampa(L1);
 
   cout << endl;
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
+  cout << endl;
+
+  cout << "Lista x (= x + y):" << endl;
+  stampa(x);
+
+  cout << endl;
+
+  cout << "Lista y:" << endl;
+  stampa(y);
+*/
+
+  k = concatena_new(L1, L2);
+
+  cout << "Lista k (= L1 + L2):" << endl;
+  stampa(k);
 
   delete_list(L1);
+  delete_list(L2);
+  delete_list(k);
+
+/*
+  delete_list(L1);
+  delete_list(L2);
+  delete_list(x);
+  // delete_list(y); 
+*/
 
   return 0;
 }

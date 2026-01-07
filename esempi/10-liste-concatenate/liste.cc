@@ -344,14 +344,23 @@ nodo* prec_ric(nodo* s, nodo* x) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// VERSIONE ITERATIVA: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1).
+// VERSIONE ITERATIVA 1: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1, PERÒ s2 esiste ancora e non è modificata).
 nodo  * concatena(nodo  * s1, nodo  * s2) {
-  if (s1 == NULL) return s2;
-  if (s2 == NULL) return s1;
+  if (s1 == NULL) {
+    return s2;
+  }
+  if (s2 == NULL) {
+    return s1;
+  }
 
   nodo  * p = s1;
 
+  /*
   while((p != NULL) && (p->next != NULL)) {
+    p = p->next;
+  }
+  */
+  while(p->next != NULL) {
     p = p->next;
   }
 
@@ -360,13 +369,91 @@ nodo  * concatena(nodo  * s1, nodo  * s2) {
   return s1;
 }
 
-// VERSIONE RICORSIVA: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1).
+/*
+// VERSIONE ITERATIVA 2 (void): Concatena in coda s2 a s1, modificando s1 e rendendo s2 non più accessibile (NOTA: SIDE EFFECTS sulle lista s1 e s2 perché passate per riferimento).
+void concatena(nodo * & s1, nodo * & s2) {
+  if (s1 == NULL) {
+    // Se s1 è vuoto, s1 diventa tutta la lista s2
+    s1 = s2;
+  } 
+  else {
+    // Scorro fino all'ultimo nodo di s1
+    nodo * p = s1;
+    while (p->next != NULL) {
+      p = p->next;
+    }
+    // Collego s2 alla fine di s1  (NOTA: funziona anche nel caso in cui s2 è vuota)
+    p->next = s2;
+  }
+
+  // Ora L2 non deve più essere accessibile
+  s2 = NULL;
+}
+*/
+
+// VERSIONE RICORSIVA 1: Concatena in coda s2 a s1, restituisce testa di s1 (NOTA: SIDE EFFECTS sulla lista s1, PERÒ s2 esiste ancora e non è modificata).
 nodo  * concatena_ric(nodo  * s1, nodo  * s2) {
   if (s1 == NULL) {
     return s2;
   }
   s1->next = concatena_ric(s1->next, s2);
   return s1;
+}
+/*
+// VERSIONE RICORSIVA 2 (void): Concatena in coda s2 a s1, modificando s1 e rendendo s2 non più accessibile (NOTA: SIDE EFFECTS sulle lista s1 e s2 perché passate per riferimento).
+void concatena_ric(nodo * & s1, nodo * & s2) {
+    // Caso base: se s1 è vuoto, diventa s2
+    if (s1 == NULL) {
+        s1 = s2;
+        s2 = NULL;
+        return;
+    }
+
+    // Caso base: se s1 ha un solo nodo e next è NULL
+    if (s1->next == NULL) {
+        s1->next = s2;
+        s2 = NULL;
+        return;
+    }
+
+    // Chiamata ricorsiva sul nodo successivo
+    concatena_ric(s1->next, s2);
+}
+*/
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// VERSIONE ITERATIVA: Concatena s1 e s2 in una nuova lista (cs1, restituita dalla funzione) (NOTA: usa come funzione ausiliaria copia).
+nodo  * concatena_new(nodo  * s1, nodo  * s2) {
+  if (s1 == NULL) {
+    return copia(s2);
+  }
+  if (s2 == NULL) {
+    return copia(s1);
+  }
+  nodo  *cs1 = copia(s1);
+  nodo  *cs2 = copia(s2);
+
+  nodo  * p;
+
+  // for (p = cs1; ((p != NULL) && (p->next != NULL)); p = p->next);  NOTA: non serve controllare (p != NULL) già controllato prima con if che s1 (e quindi cs1) != da NULL.
+  for (p = cs1; p->next != NULL; p = p->next);
+
+  p->next = cs2;
+
+  return cs1;
+}
+
+// VERSIONE RICORSIVA: Concatena s1 e s2 in una nuova lista (restituita dalla funzione) (NOTA: usa come funzione ausiliaria copia).
+nodo  * concatena_new_ric(nodo  *s1, nodo  *s2) {
+  if (s1 == NULL) {
+    return copia_ric(s2);
+  }
+
+  nodo * t = new nodo;
+  t->dato = s1->dato;
+  t->next = concatena_new_ric(s1->next, s2);
+  return t;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -415,42 +502,8 @@ nodo  * copia_ric(nodo  * s) {
     nodo* t = new nodo;
     t->dato = s->dato;
     t->next = copia_ric(s->next);  // collegamento al ritorno
-    return t;                  // ritorna SEMPRE la testa
+    return t;                      // ritorna SEMPRE la testa, perchè dopo il ritorno di tutta la ricorsione t punta alla testa
   }
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// VERSIONE ITERATIVA:
-nodo  * concat_nose(nodo  * s1, nodo  * s2) {
-  if (s1 == NULL) {
-    return copia(s2);
-  }
-  if (s2 == NULL) {
-    return copia(s1);
-  }
-  nodo  *cs1 = copia(s1);
-  nodo  *cs2 = copia(s2);
-
-  nodo  * p;
-
-  for (p = cs1; ((p != NULL) && (p->next != NULL)); p = p->next);
-
-  p->next = cs2;
-
-  return cs1;
-}
-
-// VERSIONE RICORSIVA:
-nodo  * concat_nose_recur(nodo  *s1, nodo  *s2) {
-  if (s1 == NULL) {
-    return copia(s2);
-  }
-
-  nodo * t = new nodo;
-  t->dato = s1->dato;
-  t->next = concat_nose_recur(s1->next, s2);
-  return t;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -461,6 +514,8 @@ int main() {
   nodo * y = NULL;
   nodo * t = NULL;
   nodo * s = NULL;
+  nodo * k = NULL;
+  nodo * h = NULL;
 
   nodo * L1 = NULL;
   nodo * L2 = NULL;
@@ -500,8 +555,8 @@ int main() {
   remove_element(L1, 29);
   t = get_n(L1, 3);
   cout << "Valore elemento 3 di L1 = " << t->dato << endl;
-  s = prec(L1, L1->next);
-  cout << "Valore precedente al elemento 1 di L1 = " << s->dato << endl;
+  t = prec(L1, L1->next);
+  cout << "Valore precedente al elemento 1 di L1 = " << t->dato << endl;
   
 
   insert_last_ric(L2, 22);
@@ -509,15 +564,19 @@ int main() {
   remove_element_ric(L2, 22);
   L2 = reverse(L2);
   L2 = reverse_ric(L2);
-  t = get_n_ric(L2, 3);
-  cout << "Valore elemento 3 di L1 = " << t->dato << endl;
-  s = prec_ric(L1, L1->next);
+  s = get_n_ric(L2, 3);
+  cout << "Valore elemento 3 di L1 = " << s->dato << endl;
+  s = prec_ric(L2, L2->next);
   cout << "Valore precedente al elemento 1 di L2 = " << s->dato << endl;
 
 
   x = reverse_copia(L1);
   y = reverse_copia_ric(L2);
+  k = copia(x);
+  h = copia_ric(y);
 
+  x = concatena_ric(x, y);
+  k = concatena(k, h);
 
   cout << endl;
   cout << "Lista L1:" << endl;
@@ -535,16 +594,31 @@ int main() {
   cout << "Lista y:" << endl;
   stampa(y);
 
+  cout << endl;
+  cout << "Lista k:" << endl;
+  stampa(k);
+
+  cout << endl;
+  cout << "Lista h:" << endl;
+  stampa(h);
+
   ////////////////////////////////////////////////////////////////////////////
 
   // Per eliminare memoria dinamica ed evitare memory leak:
   delete_list(L1);
   delete_list(L2);
+
   delete_list(x);
-  delete_list(y);
-  delete_list(t);
-  delete_list(s);
+  // delete_list(y); NO delete perchè y concatenata a x (NOTA: y esiste ancora ma condivide gli stessi nodi con la lista x+y).
   
+
+  // delete_list(t); NO delete perchè t è un puntatore che punta ad un nodo della lista L1, di cui ho già fatto la delete.
+  // delete_list(s); NO delete perchè s è un puntatore che punta ad un nodo della lista L2, di cui ho già fatto la delete.
+
+  delete_list(k);
+  // delete_list(h); NO delete perchè h concatenata a k (NOTA: h esiste ancora ma condivide gli stessi nodi con la lista k+h).
+  
+
   return 0;
 }
 

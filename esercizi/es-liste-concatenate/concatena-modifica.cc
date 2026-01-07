@@ -31,38 +31,40 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-nodo* copia(nodo* s) {
-  if (s == NULL) {       // lista originale vuota
-    return NULL;
+/*
+nodo  * concatena(nodo  * s1, nodo  * s2) {
+  if (s1 == NULL) return s2;
+  if (s2 == NULL) return s1;
+
+  nodo  * p = s1;
+
+  while((p != NULL) && (p->next != NULL)) {
+    p = p->next;
   }
 
-  nodo* testaNuova = NULL;  // testa della nuova lista
-  nodo* ultimo = NULL;      // puntatore all'ultimo nodo della nuova lista
-  nodo* corrente = s;          // puntatore per scorrere la lista originale
+  p->next = s2;
 
-  while (corrente != NULL) {
-    // Creo un nuovo nodo
-    nodo* nuovo = new nodo;
-    nuovo->dato = corrente->dato;
-    nuovo->next = NULL;
+  return s1;
+}
+*/
 
-    if (testaNuova == NULL) {
-      // primo nodo: inizializzo la testa della nuova lista
-      testaNuova = nuovo;
-    } 
-    else {
-      // collego il nuovo nodo all'ultimo nodo della nuova lista
-       ultimo->next = nuovo;
-      }
-
-    // aggiorno l'ultimo nodo
-    ultimo = nuovo;
-
-    // passo al prossimo nodo della lista originale
-    corrente = corrente->next;
+void concatena(nodo * & s1, nodo * & s2) {
+  if (s1 == NULL) {
+    // Se s1 è vuoto, s1 diventa tutta la lista s2
+    s1 = s2;
+  } 
+  else {
+    // Scorro fino all'ultimo nodo di s1
+    nodo * p = s1;
+    while (p->next != NULL) {
+      p = p->next;
+    }
+    // Collego s2 alla fine di s1  (NOTA: funziona anche nel caso in cui s2 è vuota)
+    p->next = s2;
   }
 
-  return testaNuova;  // restituisco la testa della nuova lista
+  // Ora L2 non deve più essere accessibile
+  s2 = NULL;
 }
 
 // Stampa contenuto della lista
@@ -101,14 +103,34 @@ int main() {
     insert_last(L1, value);
   }
 
+  for (int i = 1; i < 6; i++) {
+    value = rand() % 20;
+    insert_last(L2, value);
+  }
+
   cout << "Lista L1:" << endl;
   stampa(L1);
 
-  L2 = copia(L1);
+  cout << endl;
   cout << "Lista L2:" << endl;
   stampa(L2);
 
+  cout << endl;
 
+  // L1 = concatena(L1, L2);
+
+  concatena(L1, L2);
+
+  cout << "Lista L1 (= L1 + L2):" << endl;
+  stampa(L1);
+
+  cout << endl;
+
+  // NON FA NIENTE perché L2 = NULL (vuota)
+  cout << "Lista L2:" << endl;
+  stampa(L2);
+
+  delete_list(L1);
 
   return 0;
 }

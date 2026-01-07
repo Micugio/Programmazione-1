@@ -31,12 +31,27 @@ void insert_last(nodo * & s, int d) {
   }
 }
 
-nodo  * concatena_ric(nodo  * s1, nodo  * s2) {
-  if (s1 == NULL) {
-    return s2;
+nodo  * copia_ric(nodo  * s) {
+  if (s == NULL) {
+    return NULL;   // caso base: lista vuota
   }
-  s1->next = concatena_ric(s1->next, s2);
-  return s1;
+  else {
+    nodo* t = new nodo;
+    t->dato = s->dato;
+    t->next = copia_ric(s->next);  // collegamento al ritorno
+    return t;                      // ritorna SEMPRE la testa, perchè dopo il ritorno di tutta la ricorsione t punta alla testa
+  }
+}
+
+nodo  * concatena_new_ric(nodo  *s1, nodo  *s2) {
+  if (s1 == NULL) {
+    return copia_ric(s2);
+  }
+
+  nodo * t = new nodo;
+  t->dato = s1->dato;
+  t->next = concatena_new_ric(s1->next, s2);
+  return t;
 }
 
 // Stampa contenuto della lista
@@ -65,6 +80,7 @@ int main() {
 
   nodo * L1 = NULL;
   nodo * L2 = NULL;
+  nodo * k = NULL;
 
   int value = 0;
 
@@ -89,13 +105,13 @@ int main() {
 
   cout << endl;
 
-  L1 = concatena_ric(L1, L2);
-  cout << "Lista L1 (= L1 + L2):" << endl;
-  stampa(L1);
-
-  cout << endl;
+  k = concatena_new_ric(L1, L2);
+  cout << "Lista k (= L1 + L2):" << endl;
+  stampa(k);
 
   delete_list(L1);
+  delete_list(L2);
+  delete_list(k);
 
   return 0;
 }
