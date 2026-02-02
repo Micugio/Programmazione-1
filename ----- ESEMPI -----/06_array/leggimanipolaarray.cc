@@ -22,6 +22,7 @@ int main() {
 
   leggiArray(a,n1);
   stampaArray(a,n1);
+  // cout << "n1 = " << n1 << endl;
   cout << "La norma 1 degli elementi di a e` " << norma1(a,n1) << endl;
 
   leggiArray(b,n2);
