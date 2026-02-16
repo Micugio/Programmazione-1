@@ -36,7 +36,7 @@ void deinit (stack & s)
 }
 ///////////////////////////
 
-retval top (int &n, const stack & s)
+retval top (int & n, const stack & s)
 {
   retval res;
   if (emptyp(s))  // Se pila è VUOTA return FAIL (impossibile "LEGGERE" ultimo elemento inserito)

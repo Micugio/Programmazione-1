@@ -9,7 +9,7 @@ int main ()
   // oggi = 3; //ERRORE!
   cout << "oggi = " << oggi << endl;
 
-  enum boolean { FALSE, TRUE};
+  enum boolean {FALSE, TRUE};
   boolean X = FALSE;
 
   cout << "X = " << X << endl;

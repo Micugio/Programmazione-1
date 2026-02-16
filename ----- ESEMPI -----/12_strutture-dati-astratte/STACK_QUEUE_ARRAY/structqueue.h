@@ -1,7 +1,7 @@
 #ifndef STRUCT_QUEUE_H
 #define STRUCT_QUEUE_H
 
-// dichiarazioni per la gestine della coda di interi
+// dichiarazioni per la gestione della coda di interi
 
 using namespace std;
 #include <iostream>
@@ -11,7 +11,7 @@ using namespace std;
 static const int DIM = 4; // TEST
 
 /* 
-// Implementazione statica 
+// Implementazione statica
 struct queue 
 {
   int head, tail;
